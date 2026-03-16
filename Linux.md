@@ -39,4 +39,7 @@ bash是sh的增强版（最主流）。
 | `~/.local/bin`  | 用户自定义命令目录（新版系统推荐），可将自己的脚本 / 程序放在这里，添加到 `PATH` 后即可全局执行。                                                                                                                                                                                                                       |
 ## 环境变量加载顺序
 
-
+1. 系统启动：先加载 `/etc/environment`（纯环境变量）；
+2. 用户登录：执行 `/etc/profile` → 加载 `/etc/profile.d/*` → 执行 `~/.bash_profile`（若不存在则执行 `~/.profile`）；
+3. 打开终端（非登录）：执行 `/etc/bashrc` → 执行 `~/.bashrc`；
+4. `sh` 模式：仅加载 `/etc/profile`、`~/.profile`（禁用 `bash` 扩展，不读 `.bashrc`）。
