@@ -39,6 +39,33 @@ Docker 镜像是一个特殊的文件系统，包含：
 | **环境变量** | PATH、LANG 等预设值          |
 | **元数据**  | 启动命令、暴露端口、数据卷定义         |
 
+### 分层存储
+### 镜像的标识
+格式：`[仓库地址/]仓库名[:标签]`
+
+```
+## 完整格式
+
+registry.example.com/myproject/myapp:v1.2.3
+
+## 简写（使用 Docker Hub）
+
+nginx:1.25
+ubuntu:24.04
+
+## 省略标签（默认使用 latest）
+
+nginx  # 等同于 nginx:latest
+```
+### 镜像的来源
+
+| 方式                  | 说明           | 示例                      |
+| ------------------- | ------------ | ----------------------- |
+| **从 Registry 拉取**   | 最常用的方式       | docker pull nginx       |
+| **从 Dockerfile 构建** | 自定义镜像        | docker build -t myapp . |
+| **从容器提交**           | 保存容器状态 (不推荐) | docker commit           |
+| **从文件导入**           | 离线传输         | docker load < image.tar |
+
 
 ## 容器
 ## 仓库
