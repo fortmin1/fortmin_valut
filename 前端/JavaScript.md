@@ -55,3 +55,49 @@ console.log(multiply(3, 4)); // 12
 ```
 ## ESM
 ESM 是 ES6 推出的官方标准，核心是 `export` 和 `import`，**导出的是 “绑定关系”（而非值），支持多种导出形式**。
+##### （1）核心语法
+
+|操作|语法示例|说明|
+|---|---|---|
+|命名导出（多个）|`export const add = (a,b) => a+b;`|导出单个成员（可多个）|
+|命名导出（批量）|`export { add, User };`|批量导出已定义的成员|
+|默认导出（单个）|`export default function() {};`|每个模块只能有一个默认导出|
+|导入命名成员|`import { add } from './utils.js';`|解构导入命名导出的成员|
+|导入默认成员|`import add from './utils.js';`|导入默认导出的成员|
+|导入整个模块|`import * as utils from './utils.js';`|导入为一个模块对象（所有成员挂在上面）|
+|动态导入|`import('./utils.js').then(utils => {})`|异步导入（运行时执行）|
+
+##### （2）导出 / 导入的本质（关键）
+- **导出的是什么**：
+    - 命名导出：导出的是**变量 / 函数的绑定关系**（不是值的拷贝），如果导出方修改了变量值，导入方会同步更新；
+    - 默认导出：本质是命名为 `default` 的特殊命名导出，`export default xxx` 等价于 `export { xxx as default }`；
+    - ESM 是**静态的**（编译期分析），`export/import` 必须放在顶层（不能在 if 里），这也是它能支持树摇的原因。
+- **导入的是什么**：
+    - 导入的是**绑定关系**（而非值的拷贝），且导入的成员是只读的（不能修改导入的变量）；
+    - 模块对象（`import * as utils`）是只读的，不能修改其属性。    
+##### （3）完整示例
+```
+// utils.js (ESM 模块)
+// 命名导出
+export const version = '1.0';
+export function add(a, b) {
+  return a + b;
+}
+
+// 默认导出
+export default function multiply(a, b) {
+  return a * b;
+}
+
+// index.js (导入)
+// 导入命名成员 + 默认成员
+import multiply, { version, add } from './utils.js';
+console.log(version); // '1.0'
+console.log(add(1, 2)); // 3
+console.log(multiply(2, 3)); // 6
+
+// 导入整个模块为对象
+import * as utils from './utils.js';
+console.log(utils.version); // '1.0'
+console.log(utils.default(3, 4)); // 12（默认导出在 default 属性里）
+```
