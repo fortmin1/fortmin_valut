@@ -10,5 +10,7 @@
 ## DML
 ### 创建表
 ![](assets/Oracle/file-20260421150434125.png)
-## 修改表
+### 修改表
 ![](assets/Oracle/file-20260421150502846.png)
+### 查询
+![](assets/Oracle/file-20260421150644037.png)
