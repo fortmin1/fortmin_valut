@@ -246,3 +246,266 @@ ufw allow from 192.168.1.0/24 to any port 22
 | 容器/云环境 | 用云平台安全组 + 轻量主机防火墙 |
 
 > **Netfilter** 是内核引擎，**iptables/nftables** 是底层配置工具，**ufw/firewalld** 是上层简化封装。选哪个取决于你的发行版和需求复杂度。
+
+---
+
+# Linux 包管理体系
+
+## 整体架构
+
+```
+用户态
+  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌───────────┐
+  │   dpkg    │ │   rpm    │ │ snap/    │ │  flatpak  │
+  │ (Debian系)│ │ (RedHat系)│ │ flatpak  │ │           │
+  └────┬─────┘ └────┬─────┘ └────┬─────┘ └─────┬─────┘
+       │             │            │              │
+  ┌────┴─────┐ ┌────┴─────┐      │              │
+  │   apt    │ │  dnf/    │      │              │
+  │          │ │  yum     │      │              │
+  └────┬─────┘ └────┬─────┘      │              │
+       │             │            │              │
+       ▼             ▼            ▼              ▼
+  ┌──────────────────────────────────────────────────┐
+  │                  包格式（底层）                     │
+  │     .deb                    .rpm          .snap/.flatpak
+  └──────────────────────────────────────────────────┘
+```
+
+> 核心分三层：**底层包格式**（.deb / .rpm）→ **高层包管理器**（apt / dnf）→ **通用包格式**（snap / flatpak / AppImage）
+
+## 一、两大阵营
+
+### 1. Debian 系（.deb 格式）
+
+适用发行版：Ubuntu、Debian、Linux Mint、Deepin
+
+**dpkg** — 底层工具，直接操作 .deb 文件
+
+```bash
+dpkg -i package.deb      # 安装
+dpkg -r package          # 卸载
+dpkg -l                  # 列出所有已安装包
+dpkg -L package          # 查看包安装了哪些文件
+dpkg -s package          # 查看包详细信息
+```
+
+局限：不会自动解决依赖关系，装包时提示缺依赖就卡住了。
+
+**apt** — 高层工具，自动处理依赖 + 从仓库下载
+
+```bash
+apt update               # 更新软件源索引
+apt upgrade              # 升级所有可升级的包
+apt install package      # 安装（自动解决依赖）
+apt remove package       # 卸载（保留配置）
+apt purge package        # 卸载（删除配置）
+apt autoremove           # 清理不再需要的依赖
+apt search keyword       # 搜索包
+apt show package         # 查看包详情
+apt list --installed     # 列出已安装的包
+```
+
+软件源配置文件：`/etc/apt/sources.list` 和 `/etc/apt/sources.list.d/*.list`
+
+### 2. Red Hat 系（.rpm 格式）
+
+适用发行版：RHEL、CentOS、Fedora、Rocky、AlmaLinux
+
+**rpm** — 底层工具，直接操作 .rpm 文件
+
+```bash
+rpm -ivh package.rpm     # 安装
+rpm -e package           # 卸载
+rpm -qa                  # 列出所有已安装包
+rpm -ql package          # 查看包安装了哪些文件
+rpm -qi package          # 查看包详细信息
+```
+
+同样不会自动解决依赖。
+
+**yum** — RHEL/CentOS 7 及以前的高层工具（已逐步淘汰）
+
+**dnf** — yum 的继任者，Fedora 18+ / RHEL 8+ 默认
+
+```bash
+dnf check-update         # 检查更新
+dnf update               # 升级所有包
+dnf install package      # 安装
+dnf remove package       # 卸载
+dnf search keyword       # 搜索
+dnf info package         # 查看包详情
+dnf list installed       # 列出已安装
+dnf autoremove           # 清理无用依赖
+dnf repolist             # 查看启用的仓库
+```
+
+软件源配置：`/etc/yum.repos.d/*.repo`
+
+### 两大阵营对比
+
+| 对比项 | Debian 系 | Red Hat 系 |
+|---|---|---|
+| 包格式 | `.deb` | `.rpm` |
+| 底层工具 | `dpkg` | `rpm` |
+| 高层工具 | `apt` | `dnf`（新版）/ `yum`（旧版） |
+| 仓库格式 | `sources.list` | `.repo` 文件 |
+| 配置文件目录 | `/etc/apt/` | `/etc/yum.repos.d/` |
+| 本地包数据库 | `/var/lib/dpkg/` | `/var/lib/rpm/` |
+| 缓存目录 | `/var/cache/apt/` | `/var/cache/dnf/` |
+| 代表发行版 | Ubuntu、Debian | RHEL、CentOS、Fedora |
+
+## 二、apt 与 apt-get 的关系
+
+`apt-get` 和 `apt` 底层完全一样，区别只在用户体验上。
+
+```
+apt = apt-get + apt-cache 的精简整合版，加了颜色、进度条、更友好的输出
+```
+
+### 命令对应关系
+
+| apt（推荐） | apt-get / apt-cache（传统） | 说明 |
+|---|---|---|
+| `apt install` | `apt-get install` | 安装包 |
+| `apt remove` | `apt-get remove` | 卸载包 |
+| `apt purge` | `apt-get purge` | 卸载并删配置 |
+| `apt update` | `apt-get update` | 更新源索引 |
+| `apt upgrade` | `apt-get upgrade` | 升级包 |
+| `apt autoremove` | `apt-get autoremove` | 清理无用依赖 |
+| `apt search` | `apt-cache search` | 搜索包 |
+| `apt show` | `apt-cache show` | 查看包详情 |
+| `apt list` | `dpkg -l` + `apt-cache` | 列出包（支持过滤） |
+
+### 关键区别
+
+| 对比项 | apt | apt-get |
+|---|---|---|
+| 面向对象 | **交互式用户**（人） | **脚本和自动化**（机器） |
+| 输出 | 有进度条、颜色、易读 | 纯文本，适合解析 |
+| 设计目标 | 日常使用更方便 | 稳定，接口不轻易变 |
+| 出现时间 | 2014 年（Ubuntu 16.04 引入） | 1998 年 |
+
+> **终端里手动操作用 `apt`，写脚本用 `apt-get`。** 功能完全等价，`apt` 就是 `apt-get` 的"人用版"。
+
+## 三、通用包格式（跨发行版）
+
+传统 .deb/.rpm 依赖特定发行版，下面这些格式**一次打包，到处运行**：
+
+### snap（Canonical / Ubuntu 主推）
+
+```bash
+snap install vlc              # 安装
+snap remove vlc               # 卸载
+snap list                     # 列出已安装
+snap refresh                  # 更新所有
+snap info vlc                 # 查看详情
+```
+
+- 自动沙箱隔离，自动后台更新
+- 包含所有依赖，体积大
+- 启动稍慢（沙箱初始化）
+- 由 Canonical（Ubuntu 母公司）运营 Snap Store
+
+### flatpak（社区主推，Linux 桌面应用）
+
+```bash
+flatpak install flathub org.videolan.VLC   # 安装
+flatpak uninstall org.videolan.VLC         # 卸载
+flatpak list                               # 列出已安装
+flatpak update                             # 更新
+```
+
+- 沙箱隔离，权限可控
+- 主打桌面 GUI 应用
+- 仓库 Flathub 内容丰富
+
+### AppImage（绿色免安装）
+
+```bash
+# 下载后直接加执行权限运行，无需安装
+chmod +x application.AppImage
+./application.AppImage
+```
+
+- 一个文件就是一个应用，不需要安装
+- 不需要 root 权限
+- 没有统一的更新机制，需手动管理
+
+### 三者对比
+
+| 对比项 | snap | flatpak | AppImage |
+|---|---|---|---|
+| 安装方式 | 系统级安装 | 系统级安装 | 免安装，直接运行 |
+| 沙箱隔离 | 有 | 有 | 无 |
+| 自动更新 | 有 | 有 | 无 |
+| 服务端 | Snap Store（Canonical） | Flathub（社区） | 无中心化仓库 |
+| 适合场景 | Ubuntu 生态 | 桌面 GUI 应用 | 便携工具 |
+| 服务器适用 | 可以 | 不适合 | 可以 |
+| 体积 | 大 | 大 | 较小 |
+
+## 四、其他发行版的包管理器
+
+| 发行版 | 包管理器 | 包格式 | 说明 |
+|---|---|---|---|
+| Arch Linux | **pacman** | `.pkg.tar.zst` | 滚动更新，AUR 生态极丰富 |
+| Gentoo | **emerge** | 源码编译 | 从源码编译安装，可极致优化 |
+| Alpine | **apk** | `.apk` | 轻量级，Docker 容器常用 |
+| openSUSE | **zypper** | `.rpm` | SUSE 系的 rpm 高层工具 |
+| Void Linux | **xbps** | `.xbps` | 独立发行版 |
+
+Arch 的 pacman：
+
+```bash
+pacman -Syu           # 更新系统
+pacman -S package     # 安装
+pacman -R package     # 卸载
+pacman -Qs keyword    # 搜索已安装
+pacman -Ss keyword    # 搜索仓库
+```
+
+## 五、一个包里有什么
+
+以 `.deb` 为例，本质是个 `ar` 归档文件：
+
+```
+package.deb
+├── debian-binary          # 版本信息
+├── control.tar.gz         # 元信息（包名、版本、依赖列表、安装/卸载脚本）
+└── data.tar.gz            # 实际文件（编译好的二进制、配置文件、文档等）
+```
+
+包的元信息包含：包名、版本号、架构（amd64/arm64 等）、依赖列表（depends）、冲突列表（conflicts）、安装前/后脚本（preinst / postinst）、卸载前/后脚本（prerm / postrm）。
+
+## 六、源码编译安装（通用方式）
+
+当软件仓库里没有时，可以从源码编译：
+
+```bash
+# 经典三步曲
+./configure           # 检测系统环境，生成 Makefile
+make                  # 编译
+make install          # 安装到系统目录
+
+# 或者用 cmake 的项目
+mkdir build && cd build
+cmake ..
+make
+make install
+```
+
+缺点：不受包管理器管理，卸载困难，升级需手动重新编译。可以用 `checkinstall` 把编译结果打包成 .deb/.rpm 来解决。
+
+## 七、选型速查
+
+| 场景 | 用什么 |
+|---|---|
+| Ubuntu 装软件 | `apt install` |
+| CentOS/RHEL 装软件 | `dnf install` |
+| 装最新版桌面应用 | `flatpak install` |
+| 要免安装便携工具 | 下载 AppImage |
+| 需要最新最全的软件 | Arch Linux + AUR |
+| Docker 容器里 | Alpine + `apk` |
+| 仓库里没有 | 源码编译 / 去 GitHub 下载预编译二进制 |
+
+> Debian 系用 apt + .deb，Red Hat 系用 dnf + .rpm，想跨发行版用 flatpak/snap/AppImage，没有的就源码编译。
