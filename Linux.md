@@ -196,12 +196,12 @@ firewall-cmd --add-forward-port=port=8080:proto=tcp:toport=80:toaddr=192.168.1.1
 
 **Zone（区域）概念**：不同网络环境用不同规则集
 
-| Zone | 含义 |
-|---|---|
-| trusted | 完全信任，放行所有 |
-| home | 家庭网络，信任度高 |
-| public | 公共网络，默认只放行 SSH/DHCP |
-| drop | 拒绝所有入站 |
+| Zone    | 含义                  |
+| ------- | ------------------- |
+| trusted | 完全信任，放行所有           |
+| home    | 家庭网络，信任度高           |
+| public  | 公共网络，默认只放行 SSH/DHCP |
+| drop    | 拒绝所有入站              |
 
 底层实际调用的也是 nftables（CentOS 8+）或 iptables（CentOS 7）。
 
