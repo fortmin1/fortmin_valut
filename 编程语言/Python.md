@@ -43,3 +43,4 @@ def log(text):
         return wrapper
     return decorator
 ```
+# 面向对象编程
