@@ -18,3 +18,5 @@ dict、set
 可迭代对象：`list`、`tuple`、`dict`、`set`、`str`、generator
 `list`、`dict`、`str`虽然是`Iterable`，却不是`Iterator`
 # 函数式编程
+# 高阶函数
+把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
