@@ -8,3 +8,5 @@
 空值
 常量
 list、tuple
+dict、set
+切片
