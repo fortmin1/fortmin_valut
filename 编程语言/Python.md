@@ -20,7 +20,21 @@ dict、set
 # 函数式编程
 ## 高阶函数
 把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
+## 匿名函数‘
+
 ## 装饰器
 函数也是一个对象，而且函数对象可以被赋值给变量。
 函数对象有一个`__name__`属性（注意：是前后各两个下划线），可以拿到函数的名字。
-“装饰器”（Decorator）就是一个返回函数的高阶函数
+“装饰器”（Decorator）就是一个返回函数的高阶函数。
+```python
+import functools
+
+def log(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
