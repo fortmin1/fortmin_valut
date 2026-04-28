@@ -75,3 +75,5 @@ class Student(object):
         print('%s: %s' % (self.__name, self.__score))
 
 ```
+## 使用__slots__
+
