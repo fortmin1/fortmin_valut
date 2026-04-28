@@ -106,3 +106,6 @@ class Student(object):
     def birth(self):
         return self.birth
 ```
+## 多继承与Mixin
+Mixin是一种基于组合思想的继承方法，多继承是实现它的语言机制。
+在python中，使用多继承要注意MRO：方法解析顺序，在Python里先使用先继承的方法。
