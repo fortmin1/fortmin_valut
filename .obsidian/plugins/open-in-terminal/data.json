@@ -1,14 +1,14 @@
 {
   "terminalApp": {
-    "win": "C:\\Windows\\system32\\wsl.exe --distribution-id {4d87ad4f-e316-4132-9e50-51b841f2c375}"
+    "win": ""
   },
-  "enableClaude": true,
+  "enableClaude": false,
   "enableCodex": false,
   "enableCursor": false,
   "enableGemini": false,
   "enableOpencode": false,
-  "enableWslOnWindows": true,
-  "enableGitCommitPush": true,
-  "enableGitPull": true,
+  "enableWslOnWindows": false,
+  "enableGitCommitPush": false,
+  "enableGitPull": false,
   "defaultCommitMessage": "update"
 }
