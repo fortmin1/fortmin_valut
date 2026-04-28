@@ -1,6 +1,6 @@
 {
   "terminalApp": {
-    "win": "cmd.exe"
+    "win": "C:\\Windows\\system32\\wsl.exe --distribution-id {4d87ad4f-e316-4132-9e50-51b841f2c375}"
   },
   "enableClaude": true,
   "enableCodex": false,
