@@ -98,3 +98,11 @@ class Student(object):
             raise ValueError('score must between 0 ~ 100!')
         self._score = value
 ```
+特别注意：属性的方法名不要和实例变量名重复，否则调用时就会陷入无限循环。
+```python
+class Student(object):
+    # 方法名称和实例变量均为birth:
+    @property
+    def birth(self):
+        return self.birth
+```
