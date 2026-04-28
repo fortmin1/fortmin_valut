@@ -1,0 +1,14 @@
+{
+  "terminalApp": {
+    "win": "cmd.exe"
+  },
+  "enableClaude": true,
+  "enableCodex": false,
+  "enableCursor": false,
+  "enableGemini": false,
+  "enableOpencode": false,
+  "enableWslOnWindows": true,
+  "enableGitCommitPush": true,
+  "enableGitPull": true,
+  "defaultCommitMessage": "update"
+}
