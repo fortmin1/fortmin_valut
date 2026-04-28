@@ -76,4 +76,9 @@ class Student(object):
 
 ```
 ## 使用__slots__
-
+slots用于限制实例的属性
+```python
+class Student(object):
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+```
+slots仅对当前类实例有用，对子类不起作用，除非字类也定义slots，这样就会继承。
