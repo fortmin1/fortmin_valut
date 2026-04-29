@@ -2,7 +2,19 @@
 2. js for in for of
 # 数据类型
 ## 判断数据类型
-
+```python
+type(x)                 # 查看类型
+isinstance(x, int)      # 判断整数
+isinstance(x, float)    # 判断小数
+isinstance(x, str)      # 判断字符串
+isinstance(x, bool)     # 判断布尔值
+isinstance(x, list)     # 判断列表
+isinstance(x, tuple)    # 判断元组
+isinstance(x, dict)     # 判断字典
+isinstance(x, set)      # 判断集合
+x is None               # 判断是否为 None
+callable(x)             # 判断是否可调用
+```
 ## 整数
 ## 浮点数
 ## 字符串
