@@ -40,7 +40,34 @@ def get_user(user_id: UserId) -> JsonDict:
         "name": "Tom",
         "active": True
     }
+# Any
+from typing import Any
 
+def handle(value: Any) -> Any:
+    return value    
+# Literal
+from typing import Literal
+
+def set_mode(mode: Literal["dev", "prod", "test"]) -> None:
+    print(mode)
+# TypedDict
+from typing import TypedDict
+
+class User(TypedDict):
+    name: str
+    age: int
+
+user: User = {
+    "name": "Tom",
+    "age": 18
+}    
+# 泛型
+from typing import TypeVar
+
+T = TypeVar("T")
+
+def first(items: list[T]) -> T:
+    return items[0]    
 ```
 
 ## 判断数据类型
