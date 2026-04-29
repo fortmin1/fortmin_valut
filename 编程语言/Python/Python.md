@@ -12,6 +12,7 @@ isinstance(x, list)     # 判断列表
 isinstance(x, tuple)    # 判断元组
 isinstance(x, dict)     # 判断字典
 isinstance(x, set)      # 判断集合
+if not xxx              # 判断是否为空
 x is None               # 判断是否为 None
 callable(x)             # 判断是否可调用
 ```
