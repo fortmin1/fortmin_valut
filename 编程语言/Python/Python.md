@@ -4,6 +4,25 @@
 ## 整数
 ## 浮点数
 ## 字符串
+```python
+s1 = "hello"  
+s2 = 'hello'  
+s3 = """多行  
+字符串"""
+```
+### 字符串格式化
+f-string:
+```python
+name = "Alice"
+age = 18
+
+print(f"我叫{name}，今年{age}岁")
+```
+原始字符串：
+```python
+path = r"C:\Users\Alice\Desktop"
+print(path)
+```
 
 ## 布尔
 ## 空值
