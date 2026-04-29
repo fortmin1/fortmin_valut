@@ -3,6 +3,31 @@
 # 数据类型
 ## 类型系统
 Python 是动态类型语言，也是强类型语言。
+1. 变量名没有固定类型
+2. Python没有自动类型转换
+3. 类型注解
+```python
+# 基础类型
+name: str = "Tom"
+age: int = 18
+price: float = 9.9
+is_active: bool = True
+# 列表
+names: list[str] = ["Tom", "Jack"]
+scores: list[int] = [90, 85, 100]
+# 字典
+user: dict[str, str | int] = {
+    "name": "Tom",
+    "age": 18
+}
+# 元组
+nums: tuple[int, ...] = (1, 2, 3, 4)
+# 集合
+tags: set[str] = {"python", "backend"}
+# None和可选类型
+name: str | None = None
+
+```
 
 ## 判断数据类型
 ```python
@@ -16,7 +41,7 @@ isinstance(x, tuple)    # 判断元组
 isinstance(x, dict)     # 判断字典
 isinstance(x, set)      # 判断集合
 if not xxx              # 判断是否为空
-x is None               # 判断是否为 None
+x is [not] None               # 判断是否为 None
 callable(x)             # 判断是否可调用
 ```
 ## 整数
