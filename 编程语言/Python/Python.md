@@ -1,6 +1,9 @@
 1. UTF-8 BOM是什么
 2. js for in for of
 # 数据类型
+## 类型系统
+Python 是动态类型语言，也是强类型语言。
+
 ## 判断数据类型
 ```python
 type(x)                 # 查看类型
