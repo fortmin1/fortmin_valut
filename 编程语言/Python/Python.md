@@ -64,6 +64,11 @@ bart = Student('Bart', 59)
 print(lisa.name, lisa.get_grade())
 print(bart.name, bart.get_grade())
 ```
+## 实例属性和类属性
+```python
+class Student(object):
+    name = 'Student'
+```
 ## 访问限制
 ```python
 class Student(object):
