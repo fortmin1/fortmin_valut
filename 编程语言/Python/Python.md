@@ -26,6 +26,20 @@ nums: tuple[int, ...] = (1, 2, 3, 4)
 tags: set[str] = {"python", "backend"}
 # None和可选类型
 name: str | None = None
+# 联合类型
+def double(x: int | float) -> int | float:
+    return x * 2
+
+# 类型别名
+UserId = int
+JsonDict = dict[str, str | int | float | bool | None]
+
+def get_user(user_id: UserId) -> JsonDict:
+    return {
+        "id": user_id,
+        "name": "Tom",
+        "active": True
+    }
 
 ```
 
