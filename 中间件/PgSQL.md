@@ -24,3 +24,8 @@ PostgreSQL 以其丰富的数据类型著称，以下是开发中最常用的几
 - **`UUID`**: 通用唯一识别码。
 - **`ARRAY`**: 数组类型，例如`TEXT[]` 可以存储标签列表。
 - `INET`：ip类型
+# SQL
+## DDL
+## DML
+## DQL
+## DCL
