@@ -26,9 +26,37 @@ PostgreSQL 以其丰富的数据类型著称，以下是开发中最常用的几
 - `INET`：ip类型
 # 常用函数
 ## 字符函数
+- **`CONCAT(a, b)`****/****`||`**：拼接字符串。
+- **`UPPER()`****/****`LOWER()`**：转换大小写。
+- **`SUBSTR(string, start, len)`**：截取字符串。
+- **`REPLACE(string, from, to)`**：替换内容。
+- **`COALESCE(value, default)`**：**【超级常用】** 如果字段是 NULL，就给它一个默认值。
 ## 数值函数
+- **`ROUND(numeric, 2)`**：四舍五入。
+- **`CEIL()`****/****`FLOOR()`**：向上/向下取整。
+- **`ABS()`**：取绝对值。
 ## 日期函数
+- **`NOW()`**：获取当前完整时间。
+- **`CURRENT_DATE`**：获取当前日期。
+- **`AGE(timestamp)`**：计算时间差。
+- **`EXTRACT(field FROM source)`**：提取年、月、日、小时。
+- - **`TO_CHAR()`**：将时间格式化为字符串。
+```SQL
+-- 变成类似 2026-04-14 14:30:00 的格式
+ SELECT TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') FROM file_details;
+```
 ## 聚合函数
+- **`CASE WHEN`**：SQL 里的`if-else`。
+```SQL
+-- 给文件分等级
+ SELECT file_name, 
+ CASE
+  WHEN file_size > 1024*1024*100 THEN '大文件'
+  WHEN file_size > 1024*1024*10 THEN '中文件' 
+  ELSE '小文件' 
+  END AS file_level 
+  FROM files;
+```
 # SQL
 ## DDL
 ## DML
