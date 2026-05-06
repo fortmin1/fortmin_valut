@@ -57,6 +57,17 @@ PostgreSQL 以其丰富的数据类型著称，以下是开发中最常用的几
   END AS file_level 
   FROM files;
 ```
+- **`STRING_AGG(field, delimiter)`**：**【PG特色】** 把多行结果合并成一行字符串。
+```SQL
+-- 把某个用户的所有标签拼成一个逗号分隔的字符串 
+SELECT uploader_ip, STRING_AGG(tags::text, ' | ') FROM file_details GROUP BY uploader_ip;
+```
+OR
+```SQL
+SELECT uploader_ip, 
+-- 先把所有数组合并成一个大数组，再转为字符串 
+array_to_string(array_agg(unnest_tags), ', ') FROM ( SELECT uploader_ip, unnest(tags) AS unnest_tags FROM file_details ) t GROUP BY uploader_ip;
+```
 # SQL
 ## DDL
 ## DML
