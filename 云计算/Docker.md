@@ -74,3 +74,5 @@ nginx  # 等同于 nginx:latest
 ## 数据卷
 
 ![](assets/Docker/file-20260316173921839.png)
+## 挂载主机目录
+## tmpfs挂载
