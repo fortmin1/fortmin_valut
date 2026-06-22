@@ -51,6 +51,11 @@ keystrokes have different meanings in different operating modes;
 - `ci[` change the contents inside the current pair of square brackets
 - `da'` delete a single-quoted string, including the surrounding single quotes
 ## Replace
+`:s` (substitute) command ([documentation](https://vim.fandom.com/wiki/Search_and_replace)).
+- `%s/foo/bar/g`
+    - replace foo with bar globally in file
+- `%s/\[.*\](\(.*\))/\1/g`
+    - replace named Markdown links with plain URLs
 ## Visual
 - Visual: `v`
 - Visual Line: `V`
