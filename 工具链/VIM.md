@@ -9,7 +9,9 @@ keystrokes have different meanings in different operating modes;
 - press the `Esc`  key to switch to normal mode.
 - press the `i` key to switch to instert mode.
 - press the `R` key to switch to replace mode.
-- press the `v` key to switch to replace mode.
+- press the `v` key to switch to visual mode.
+- press the `V` key to switch to visual line mode.
+- press the `Ctrl-V` to swi
 ## Insert
 ## Replace
 ## Visual
