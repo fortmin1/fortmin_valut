@@ -1,3 +1,5 @@
+# 隐式规则
+
 # 变量
 ## 定义
 ```makefile
@@ -37,3 +39,25 @@ $(TARGET): $(OBJS)
 CC = riscv64-linux-gnu-gcc
 ```
 ## 自动变量
+在`Makefile`中，经常可以看到`$@`、`$<`这样的变量，这种变量称为自动变量（Automatic Variable），它们在一个规则中自动指向某个值。
+例如，`$@`表示目标文件，`$^`表示所有依赖文件，因此，我们可以这么写：
+```makefile
+world.out: hello.o main.o
+	cc -o $@ $^
+```
+在没有歧义时可以写`$@`，也可以写`$(@)`，有歧义时必须用括号，例如`$(@D)`。
+为了更好地调试，我们还可以把变量打印出来：
+```makefile
+world.out: hello.o main.o
+	@echo '$$@ = $@' # 变量 $@ 表示target
+	@echo '$$< = $<' # 变量 $< 表示第一个依赖项
+	@echo '$$^ = $^' # 变量 $^ 表示所有依赖项
+	cc -o $@ $^
+```
+执行结果输出如下：
+```plain
+$@ = world.out
+$< = hello.o
+$^ = hello.o main.o
+cc -o world.out hello.o main.o
+```
