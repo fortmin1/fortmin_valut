@@ -25,7 +25,11 @@ keystrokes have different meanings in different operating modes;
     - `,` / `;` for navigating matches
 - Search: `/{regex}`, `n` / `N` for navigating matches
 ### Counts
+- `3w` move 3 words forward
+- `5j` move 5 lines down
+- `7dw` delete 7 words
 ## Insert
+### Edit
 - `i` enter Insert mode
     - but for manipulating/deleting text, want to use something more than backspace
 - `o` / `O` insert line below / above
@@ -42,6 +46,8 @@ keystrokes have different meanings in different operating modes;
 - `y` to copy / “yank” (some other commands like `d` also copy)
 - `p` to paste
 - Lots more to learn: e.g. `~` flips the case of a character
+### Modifiers
+
 ## Replace
 ## Visual
 - Visual: `v`
