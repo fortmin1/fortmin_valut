@@ -11,9 +11,42 @@ keystrokes have different meanings in different operating modes;
 - press the `R` key to switch to replace mode.
 - press the `v` key to switch to visual mode,the `V` key to switch to visual line mode,the `Ctrl-V` to switch to visual block mode.
 - press the `:` key to switch to command-line mode.
+### Movement
+- Basic movement: `hjkl` (left, down, up, right)
+- Words: `w` (next word), `b` (beginning of word), `e` (end of word)
+- Lines: `0` (beginning of line), `^` (first non-blank character), `$` (end of line)
+- Screen: `H` (top of screen), `M` (middle of screen), `L` (bottom of screen)
+- Scroll: `Ctrl-u` (up), `Ctrl-d` (down)
+- File: `gg` (beginning of file), `G` (end of file)
+- Line numbers: `:{number}<CR>` or `{number}G` (line {number})
+- Misc: `%` (corresponding item)
+- Find: `f{character}`, `t{character}`, `F{character}`, `T{character}`
+    - find/to forward/backward {character} on the current line
+    - `,` / `;` for navigating matches
+- Search: `/{regex}`, `n` / `N` for navigating matches
+### Counts
 ## Insert
+- `i` enter Insert mode
+    - but for manipulating/deleting text, want to use something more than backspace
+- `o` / `O` insert line below / above
+- `d{motion}` delete {motion}
+    - e.g. `dw` is delete word, `d$` is delete to end of line, `d0` is delete to beginning of line
+- `c{motion}` change {motion}
+    - e.g. `cw` is change word
+    - like `d{motion}` followed by `i`
+- `x` delete character (equal to `dl`)
+- `s` substitute character (equal to `cl`)
+- Visual mode + manipulation
+    - select text, `d` to delete it or `c` to change it
+- `u` to undo, `<C-r>` to redo
+- `y` to copy / “yank” (some other commands like `d` also copy)
+- `p` to paste
+- Lots more to learn: e.g. `~` flips the case of a character
 ## Replace
 ## Visual
+- Visual: `v`
+- Visual Line: `V`
+- Visual Block: `Ctrl-v`
 ## Command-line
 - `:q` quit (close window)
 - `:w` save (“write”)
