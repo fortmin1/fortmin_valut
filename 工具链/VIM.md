@@ -10,7 +10,7 @@ keystrokes have different meanings in different operating modes;
 - press the `i` key to switch to instert mode.
 - press the `R` key to switch to replace mode.
 - press the `v` key to switch to visual mode,the `V` key to switch to visual line mode,the `Ctrl-V` to switch to visual block mode.
-- press the `:` key to switch command-line mode.
+- press the `:` key to switch to command-line mode.
 ## Insert
 ## Replace
 ## Visual
