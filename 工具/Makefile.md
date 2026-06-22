@@ -40,7 +40,18 @@ cd_ok:
 	cd .. && pwd
 ```
 # 控制打印
-
+```makefile
+no_output:
+	@echo 'not display'
+	echo 'will display'
+```
+# 控制错误
+make执行命令遇到错误会停止，使用-忽略错误并继续执行
+```makefile
+ignore_error:
+	-rm zzz.txt
+	echo 'ok'
+```
 # 隐式规则
 
 # 变量
