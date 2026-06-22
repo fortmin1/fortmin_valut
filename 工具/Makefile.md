@@ -10,6 +10,23 @@ m.txt: a.txt b.txt
 3、make会打印出执行的每一条命令。
 4、make使用文件的创建时间和修改时间进行增量编译
 # 伪目标
+```makefile
+clean:
+	rm -f m.txt
+	rm -f x.txt
+```
+1、clean没有依赖文件，要执行它必须使用make clean
+2、执行时没有创建一个名为clean的文件，如果手动创建一个名为clean的文件，这个规则就不会执行
+3、如果希望make不将clean视作文件，每次都执行它，可以添加一个标识，将其视为伪目标（Phony Target)
+```makefile
+.PHONY: clean
+clean:
+	rm -f m.txt
+	rm -f x.txt
+```
+# 执行多条命令
+1、make对每行命令都会创建一个独立的shell环境
+2、
 # 隐式规则
 
 # 变量
