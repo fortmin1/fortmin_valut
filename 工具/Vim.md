@@ -28,6 +28,37 @@ keystrokes have different meanings in different operating modes;
 - `3w` move 3 words forward
 - `5j` move 5 lines down
 - `7dw` delete 7 words
+### Marcos
+- `q{character}` to start recording a macro in register `{character}`
+- `q` to stop recording
+- `@{character}` replays the macro
+- Macro execution stops on error
+- `{number}@{character}` executes a macro {number} times
+- Macros can be recursive
+    - first clear the macro with `q{character}q`
+    - record the macro, with `@{character}` to invoke the macro recursively (will be a no-op until recording is complete)
+- Example: convert xml to json ([file](https://missing.csail.mit.edu/2020/files/example-data.xml))
+    - Array of objects with keys “name” / “email”
+    - Use a Python program?
+    - Use sed / regexes
+        - `g/people/d`
+        - `%s/<person>/{/g`
+        - `%s/<name>\(.*\)<\/name>/"name": "\1",/g`
+        - …
+    - Vim commands / macros
+        - `Gdd`, `ggdd` delete first and last lines
+        - Macro to format a single element (register `e`)
+            - Go to line with `<name>`
+            - `qe^r"f>s": "<ESC>f<C"<ESC>q`
+        - Macro to format a person
+            - Go to line with `<person>`
+            - `qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q`
+        - Macro to format a person and go to the next person
+            - Go to line with `<person>`
+            - `qq@pjq`
+        - Execute macro until end of file
+            - `999@q`
+        - Manually remove last `,` and add `[` and `]` delimiters
 ## Insert
 ### Edit
 - `i` enter Insert mode
