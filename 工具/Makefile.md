@@ -53,7 +53,14 @@ ignore_error:
 	echo 'ok'
 ```
 # 隐式规则
+`make`内置了隐式规则（Implicit Rule），即遇到一个`xyz.o`时，如果没有找到对应的规则，就自动应用一个隐式规则：
 
+```makefile
+xyz.o: xyz.c
+	cc -c -o xyz.o xyz.c
+```
+`make`针对C、C++、ASM、Fortran等程序内置了一系列隐式规则，可以参考官方手册查看。
+对于C程序来说，使用隐式规则有一个潜在问题，那就是无法跟踪`.h`文件的修改。如果我们修改了`hello.h`的定义，由于隐式规则`main.o: main.c`并不会跟踪`hello.h`的修改，导致`main.c`不会被重新编译。
 # 变量
 ## 定义
 ```makefile
