@@ -25,8 +25,22 @@ clean:
 	rm -f x.txt
 ```
 # 执行多条命令
-1、make对每行命令都会创建一个独立的shell环境
-2、
+make对每行命令都会创建一个独立的shell环境，下面是几种解决方法
+```makefile
+# 1.使用;分隔
+cd_ok:
+	pwd; cd ..; pwd;
+# 2.使用换行符
+cd_ok:
+	pwd; \
+	cd ..; \
+	pwd
+# 3.使用&&，惰性执行
+cd_ok:
+	cd .. && pwd
+```
+# 控制打印
+
 # 隐式规则
 
 # 变量
