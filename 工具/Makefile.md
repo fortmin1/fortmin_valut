@@ -122,3 +122,4 @@ $< = hello.o
 $^ = hello.o main.o
 cc -o world.out hello.o main.o
 ```
+# 模式规则
