@@ -125,6 +125,7 @@ cc -o world.out hello.o main.o
 # 模式规则
 我们可以自定义模式规则（Pattern Rules），它允许make匹配模式规则，如果匹配上了，就自动创建一条模式规则。
 可以使用模式规则来匹配隐式规则。
+模式规则是按需生成的。
 ```makefile
 OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
 TARGET = world.out
