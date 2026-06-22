@@ -123,3 +123,20 @@ $^ = hello.o main.o
 cc -o world.out hello.o main.o
 ```
 # 模式规则
+我们可以自定义模式规则（Pattern Rules），它允许make匹配模式规则，如果匹配上了，就自动创建一条模式规则。
+可以使用模式规则来匹配隐式规则。
+```makefile
+OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
+TARGET = world.out
+
+$(TARGET): $(OBJS)
+	cc -o $(TARGET) $(OBJS)
+
+# 模式匹配规则：当make需要目标 xyz.o 时，自动生成一条 xyz.o: xyz.c 规则:
+%.o: %.c
+	@echo 'compiling $<...'
+	cc -c -o $@ $<
+
+clean:
+	rm -f *.o $(TARGET)
+```
