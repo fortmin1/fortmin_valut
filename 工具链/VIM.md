@@ -47,7 +47,9 @@ keystrokes have different meanings in different operating modes;
 - `p` to paste
 - Lots more to learn: e.g. `~` flips the case of a character
 ### Modifiers
-
+- `ci(` change the contents inside the current pair of parentheses
+- `ci[` change the contents inside the current pair of square brackets
+- `da'` delete a single-quoted string, including the surrounding single quotes
 ## Replace
 ## Visual
 - Visual: `v`
