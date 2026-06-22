@@ -1,5 +1,13 @@
 # 规则
-
+Makefile由若干条规则（Rule）构成，每一条规则指出一个目标文件（Target），若干依赖文件（prerequisites）,以及生成目标文件的命令。
+```makefile
+# 目标文件: 依赖文件1 依赖文件2
+m.txt: a.txt b.txt
+	cat a.txt b.txt > m.txt
+```
+1、makefile会默认执行第一条规则，其它规则的顺序无关紧要，make执行时会自动判断依赖。
+2、命令必须以Tab开头。
+3、make会打印出执行的每一条命令。
 # 伪目标
 # 隐式规则
 
