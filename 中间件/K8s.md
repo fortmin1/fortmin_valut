@@ -1,6 +1,8 @@
 # 核心概念
 ## Pod
 k8s最小的调度单位。一个Pod可以包含一个或多个紧密协作的容器（共享网络和存储）。
+Pod 通常不会被直接创建，而是通过 Deployment 等控制器来管理。当节点发生故障时，控制器会在其他可用节点上重新创建 Pod。
+
 ## Node
 运行 Pod 的物理机或虚拟机。
 必要组件包括 kubelet、容器运行时（如 containerd 或 CRI-O）和 kube-proxy；
