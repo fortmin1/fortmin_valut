@@ -2,7 +2,8 @@
 ## Pod
 k8s最小的调度单位。一个Pod可以包含一个或多个紧密协作的容器（共享网络和存储）。
 Pod 通常不会被直接创建，而是通过 Deployment 等控制器来管理。当节点发生故障时，控制器会在其他可用节点上重新创建 Pod。
-
+容器组 (Pod) 的设计主要是为了解决应用间的紧密协作和资源共享问题。
+容器组可以挂载一组存储卷 (挂载点)。卷不只用于持久化，也可用于 `emptyDir` 临时交换、ConfigMap/Secret 投射、日志旁路收集等场景。真正需要跨 Pod 生命周期保留的数据，应使用 PersistentVolume / PersistentVolumeClaim 等持久化机制。
 ## Node
 运行 Pod 的物理机或虚拟机。
 必要组件包括 kubelet、容器运行时（如 containerd 或 CRI-O）和 kube-proxy；
