@@ -113,13 +113,9 @@ spec:
           requests:
             storage: 10Gi
 ```
-
 StatefulSet 的核心特性：
-
 - **稳定的网络标识**：Pod 名称按顺序编号（mysql-0, mysql-1, mysql-2），配合 Headless Service 提供可预测的 DNS 名称
-    
 - **有序部署与删除**：Pod 按序号顺序创建，逆序删除
-    
 - **持久化存储**：通过 `volumeClaimTemplates` 为每个 Pod 自动创建独立的 PVC
 ## DaemonSet
 **DaemonSet** 确保在集群的每个节点（或指定节点）上运行一个 Pod 副本。典型用途包括日志收集、监控代理和网络插件。
