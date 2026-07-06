@@ -1,3 +1,12 @@
+# 容器技术
+chroot：
+chroot可以给进程绑定一个专属的根目录，
+让程序只能在根目录的范围内读写文件
+LXC：Linux container
+独立文件系统、设备、网络、CPU等底层资源
+被称为 **操作系统层虚拟化（OS-level virtualization）**
+Docker：结合chroot和lxc的优点
+k8s
 # Docker简介
 ## Docker 技术基础
 Docker 使用 [Go 语言](https://golang.google.cn/)开发，基于 Linux 内核的以下技术：
