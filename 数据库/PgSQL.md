@@ -73,3 +73,22 @@ array_to_string(array_agg(unnest_tags), ', ') FROM ( SELECT uploader_ip, unnest(
 ## DML
 ## DQL
 ## DCL
+# 权限体系
+## 角色
+pg中user是role的子集，底层相同，区别是user可以登录，role之间可以继承，继承是复制行为。
+```SQL
+-- 两者完全等价 
+CREATE USER app_user;
+ CREATE ROLE app_user LOGIN; 
+ -- 无登录权限的组角色 CREATE ROLE app_group;
+```
+## Schema
+schema是数据库内部的**逻辑命名空间**
+**search path关键匹配规则**
+用户查询表时不写schema，按照search path匹配
+```SQL
+-- 查看当前检索路径
+ SHOW search_path;
+  -- 给用户设置默认schema
+   ALTER ROLE app_user SET search_path = biz, public;
+```
