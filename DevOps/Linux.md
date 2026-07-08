@@ -509,3 +509,5 @@ make install
 | 仓库里没有 | 源码编译 / 去 GitHub 下载预编译二进制 |
 
 > Debian 系用 apt + .deb，Red Hat 系用 dnf + .rpm，想跨发行版用 flatpak/snap/AppImage，没有的就源码编译。
+
+# 用户权限体系
