@@ -511,3 +511,9 @@ make install
 > Debian 系用 apt + .deb，Red Hat 系用 dnf + .rpm，想跨发行版用 flatpak/snap/AppImage，没有的就源码编译。
 
 # 用户权限体系
+## RWX
+## SUID/SGID/Sticky
+## sudo
+## ACL
+## Capabilities
+## SELinux/AppArmor
