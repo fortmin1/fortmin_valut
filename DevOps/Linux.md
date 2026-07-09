@@ -616,6 +616,20 @@ chmod 1777 dir
 ## sudo
 ## ACL
 Access Control List带来了更加灵活的权限控制，提供了复杂权限控制的能力。
-比如我现在想
+比如我现在想单独允许mysql这个用户访问某个文件夹，不需要改group，只需要：
+```
+setfacl -m u:mysql:rwx project
+```
+查看：
+```
+getfacl project
+```
+得到一张权限表，并且包含了基础的owner/group/others
+```
+user::rwx
+user:mysql:rwx
+group::r-x
+other::---
+```
 ## Capabilities
 ## SELinux/AppArmor
