@@ -532,9 +532,10 @@ Linux不需要每个文件都配置几百个用户，所以有用户组（GID）
 -rwxr-xr-x
 -代表文件类型。
 rwx代表Owner对应的UID的权限，
-r-x代表Owner所属组对应的GID的权限
+r-x代表所属组对应的GID的权限
 而r-x则代表Others的权限
-所以Linux判断
+所以Linux判断权限的顺序：
+是不是Onwer->是不是Group->是不是Others
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
