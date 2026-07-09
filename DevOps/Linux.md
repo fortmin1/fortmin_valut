@@ -584,6 +584,7 @@ ls -l /usr/bin/passwd
 chmod u+s file
 -- 或者
 chmod 4755 file
+-- 其中s=4000
 ```
 ### SGID
 
