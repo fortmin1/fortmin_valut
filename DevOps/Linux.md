@@ -570,6 +570,10 @@ chgrp dev file
 5. 否则，使用 Others 权限。
 6. 如果对应权限满足本次操作（读、写、执行），允许访问；否则返回 `Permission denied`。
 ## SUID/SGID/Sticky
+### SUID
+### SGID
+### Sticky
+
 ## sudo
 ## ACL
 ## Capabilities
