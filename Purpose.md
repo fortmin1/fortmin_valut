@@ -24,8 +24,12 @@ to be product manager
 
 # Habits
 1. every day before go to sleep, watch back what i've done,write it down!
+2. do it right now,right now
+3. don‘t fragment your time!
+4. keep thinking,stay angry,keep rational
+5. be patient
 
 # Guiding ideology
-1. if you feel pain,you are improving,or else you are not
-
+1. are you accept this?are you accept this?are you accept this?
+2. if you feel pain,you are improving,or else you are not
 # How to lean english

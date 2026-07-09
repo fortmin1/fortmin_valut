@@ -10,8 +10,3 @@ i can cut my time into many  picees
 # way
 # mind
 
-1.are you accept this?are you accept this?are you accept this?
-2.do it right now,right now
-3.don‘t fragment your time!
-4.keep thinking,stay angry,keep rational
-2.be patient
