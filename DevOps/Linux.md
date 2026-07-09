@@ -659,4 +659,15 @@ cap_net_raw=ep
 ## SELinux/AppArmor
 前面的权限都是Discretionary Access Control，也就是自主访问控制。
 文件拥有者自己决定，但是如果程序被攻击了，例如让nginx有了root权限，整个系统就危险了。
-而
+由此有了Mandatory Access Control，典型的产品有SELinux/AppArmor，它可以让nginx即使UID=0，也不能进行规定了禁止的操作。
+# 各高级权限的典型应用场景
+
+|技术|解决的问题|典型应用|
+|---|---|---|
+|SUID|临时获得文件拥有者身份|`passwd` 修改 `/etc/shadow`|
+|SGID|保持统一用户组|团队共享开发目录|
+|Sticky Bit|防止互删文件|`/tmp` 公共临时目录|
+|ACL|对特定用户或组精细授权|共享目录、NAS 文件权限|
+|Capabilities|拆分 root 权限|`ping`、容器、网络服务|
+|sudo|按命令授权管理员权限|运维、开发日常管理|
+|SELinux / AppArmor|强制安全策略|企业服务器、安全加固|
