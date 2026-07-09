@@ -549,7 +549,18 @@ w=2
 x=1
 对应权限就是rwxr-xr-x
 ### 修改拥有者
-
+修改 Owner：
+```
+chown nginx file
+```
+修改 Owner 和 Group：
+```
+chown nginx:www file
+```
+修改 Group：
+```
+chgrp dev file
+```
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
