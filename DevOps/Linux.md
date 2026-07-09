@@ -561,6 +561,14 @@ chown nginx:www file
 ```
 chgrp dev file
 ```
+### 完整流程
+当一个进程访问一个文件时，Linux 内核大致按以下顺序检查：
+1. 获取进程的 **UID** 和所属 **GID/附加组**。
+2. 获取目标文件的 **Owner、Group、权限位（rwx）**。
+3. 如果进程 UID 与文件 Owner 相同，使用 Owner 权限。
+4. 否则，如果进程属于文件 Group，使用 Group 权限。
+5. 否则，使用 Others 权限。
+6. 如果对应权限满足本次操作（读、写、执行），允许访问；否则返回 `Permission denied`。
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
