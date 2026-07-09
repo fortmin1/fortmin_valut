@@ -25,6 +25,7 @@ to be product manager
 1. 6.30-8.am,memorizing english
 2. during working hours,working,do whatever want to do
 3. 12:00-1:30,eating,philosophy/finance
+4. weekend do anything
 ## night cycle
 8：00-12：00
 1h every day for algorithm
@@ -32,7 +33,7 @@ to be product manager
 2. c learning
 3. networking
 4. database
-5. 
+5. ts pratice/frontend learning
 # Habits
 1. every day before go to sleep, watch back what i've done,write it down!
 2. do it right now,right now
