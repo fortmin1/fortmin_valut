@@ -6,9 +6,10 @@ to be product manager
 1. CSAPP/ICS
 2. yupi project
 3. C learning(NEMU/Network)
-4. philosophy/finance/
+4. philosophy/finance/exercise
 5. english
 6. ai books
+7. ui/ux,project manager
 # to do
 1. database
 2. network
@@ -23,13 +24,20 @@ to be product manager
 # loop
 1. 6.30-8.am,memorizing english
 2. during working hours,working,do whatever want to do
-3. 12:00-1:30,eating 
+3. 12:00-1:30,eating,philosophy/finance
+## night cycle
+8：00-12：00
+1h every day for algorithm
+1. caspp
+2. c learning
+3. networking
+4. database
 # Habits
 1. every day before go to sleep, watch back what i've done,write it down!
 2. do it right now,right now
 3. don‘t fragment your time!
 4. keep thinking,stay angry,keep rational
-5. be patient
+5. be patient,like water
 
 # Guiding ideology
 1. are you accept this?are you accept this?are you accept this?
