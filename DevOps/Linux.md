@@ -512,6 +512,17 @@ make install
 
 # 用户权限体系
 ## RWX
+Linux是一个**多用户操作系统**，每一个进程都永远属于一个用户，当我们判断某个操作的权限时，实际上是在判断这个进程是否有权访问某个文件。
+而Linux判断权限不靠用户名，也许你用户名叫dev，实际上你拥有root权限，它靠**UID**判断权限：
+```
+cat /etc/passwd
+-- 得到：
+
+root:x:0:0:root:/root:/bin/bash
+mysql:x:27:27:mysql:/var/lib/mysql:/sbin/nologin
+user:x:1000:1000::/home/user:/bin/bash
+```
+Linux判断UID=0，就代表root
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
