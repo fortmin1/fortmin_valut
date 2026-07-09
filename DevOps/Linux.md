@@ -512,6 +512,7 @@ make install
 
 # 用户权限体系
 ## RWX
+### UID
 Linux是一个**多用户操作系统**，每一个进程都永远属于一个用户，当我们判断某个操作的权限时，实际上是在判断这个进程是否有权访问某个文件。
 而Linux判断权限不靠用户名，也许你用户名叫dev，实际上你拥有root权限，它靠**UID**判断权限：
 ```
@@ -523,6 +524,17 @@ mysql:x:27:27:mysql:/var/lib/mysql:/sbin/nologin
 user:x:1000:1000::/home/user:/bin/bash
 ```
 Linux判断UID=0，就代表root
+### GID
+Linux不需要每个文件都配置几百个用户，所以有用户组（GID）的概念，一个文件可以被所属组下面所有人访问。
+![](assets/Linux/file-20260709085820807.png)
+### Owner
+权限的组成：
+-rwxr-xr-x
+-代表文件类型。
+rwx代表Owner对应的UID的权限，
+r-x代表Owner所属组对应的GID的权限
+而r-x则代表Others的权限
+所以Linux判断
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
