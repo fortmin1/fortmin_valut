@@ -632,4 +632,14 @@ group::r-x
 other::---
 ```
 ## Capabilities
+UID=0意味着你可以做任何事，不需要修改owner/group/other，capabilities将UID=0的权限拆分成40多个权限，并分给某个文件，使其能直接获取某种能力而不需要判断owner/group/other。它直接绑定文件而不是用户，这和ACL不同，和SUID/SGID/Sticky有一点相似。
+查看：
+```
+getcap /usr/bin/ping
+```
+得到：
+```
+cap_net_raw=ep
+```
+
 ## SELinux/AppArmor
