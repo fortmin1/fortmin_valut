@@ -535,7 +535,9 @@ rwx代表Owner对应的UID的权限，
 r-x代表所属组对应的GID的权限
 而r-x则代表Others的权限
 所以Linux判断权限的顺序：
-是不是Onwer->是不是Group->是不是Others
+是不是Onwer->是不是Group->是不是Others，找到对应所属的身份就用对应身份的权限。
+这里就有个问题，为什么root可以执行几乎所有的操作？因为root的UID=0，Linux内核对UID=0的用户做了特殊处理，使其几乎可以执行所有的操作。
+
 ### RWX
 r:读
 w:写
