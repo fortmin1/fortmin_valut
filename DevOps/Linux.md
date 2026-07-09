@@ -614,6 +614,20 @@ chmod 1777 dir
 ```
 
 ## sudo
+sudo的含义是**授权**，对用户进行授权，他的核心思想是**最小授权原则**
+配置：
+```
+/etc/sudoers
+```
+例如：
+```
+tom ALL=(ALL) /usr/bin/systemctl
+```
+于是Tom只能运行：
+```
+sudo systemctl restart nginx
+```
+不能执行其它操作
 ## ACL
 Access Control List带来了更加灵活的权限控制，提供了复杂权限控制的能力。
 比如我现在想单独允许mysql这个用户访问某个文件夹，不需要改group，只需要：
@@ -643,3 +657,6 @@ cap_net_raw=ep
 ```
 
 ## SELinux/AppArmor
+前面的权限都是Discretionary Access Control，也就是自主访问控制。
+文件拥有者自己决定，但是如果程序被攻击了，例如让nginx有了root权限，整个系统就危险了。
+而
