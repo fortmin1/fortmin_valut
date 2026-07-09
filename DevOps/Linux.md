@@ -536,6 +536,10 @@ r-x代表所属组对应的GID的权限
 而r-x则代表Others的权限
 所以Linux判断权限的顺序：
 是不是Onwer->是不是Group->是不是Others
+### RWX
+r:读
+w:写
+x
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
