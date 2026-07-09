@@ -21,7 +21,9 @@ to be product manager
 2. 12:00-1:30,eat work,1:30-2:00,sleep
 3. 6:30-8:,eat,exercise,8:-9:,rest,wash,9-12,learn,read
 # loop
-
+1. 6.30-8.am,memorizing english
+2. during working hours,working,do whatever want to do
+3. 12:00-1:30,eating 
 # Habits
 1. every day before go to sleep, watch back what i've done,write it down!
 2. do it right now,right now
