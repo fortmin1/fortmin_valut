@@ -539,7 +539,7 @@ r-x代表所属组对应的GID的权限
 ### RWX
 r:读
 w:写
-x
+x:执行，对于文件就是执行可执行文件，对于目录就是能否进入
 ## SUID/SGID/Sticky
 ## sudo
 ## ACL
