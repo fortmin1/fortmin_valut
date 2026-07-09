@@ -12,7 +12,20 @@ to be product manager
 # to do
 1. database
 2. network
-3. 
-# Way
+3. ts pratice/frontend learning
+4. compiler principles
+5. computer architecture
+6. algorithm
+# time
+1. 6.30am-8.am, wash my self,8.am-8:15am,ready to go
+2. 12:00-1:30,eat work,1:30-2:00,sleep
+3. 6:30-8:,eat,exercise,8:-9:,rest,wash,9-12,learn,read
+# loop
+
+# Habits
 1. every day before go to sleep, watch back what i've done,write it down!
 
+# Guiding ideology
+1. if you feel pain,you are improving,or else you are not
+
+# How to lean english
