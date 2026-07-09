@@ -571,7 +571,16 @@ chgrp dev file
 6. 如果对应权限满足本次操作（读、写、执行），允许访问；否则返回 `Permission denied`。
 ## SUID/SGID/Sticky
 ### SUID
+```bash
+ls -l /usr/bin/passwd
+```
+输出：
+```
+-rwsr-xr-x
+```
+其中rws中的s就是SUID，SUID的作用是让用户执行文件时直接以文件所有者（Onwer）的权限执行。比如passwd命令需要修改/etc/passwd，这个文件属于root:root，一般用户没有权限修改这个文件，也就不能修改密码，但是通过SUID可以让普通用户也能修改密码。
 ### SGID
+
 ### Sticky
 
 ## sudo
