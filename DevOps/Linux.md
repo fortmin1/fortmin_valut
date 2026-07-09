@@ -587,10 +587,35 @@ chmod 4755 file
 -- 其中s=4000
 ```
 ### SGID
-
+SGID有两种含义。
+**对文件：**
+和SUID一样，执行程序时以文件所属组的权限执行。
+**对目录：**
+当用户在他的Group拥有的目录创建文件时，文件都Onwer和Group都是这个用户，这不便于同组的其它用户进行修改等操作，使用SGID将目录的执行位设置为s就可以让当前目录下创建的文件都属于这个目录对应的用户组。
+```
+chmod g+s project
+```
 ### Sticky
+```
+ls -ld /tmp
+```
+得到：
+```
+drwxrwxrwt
+```
+其中的t就是Sticky
+对于加上sticky的文件，只有Owner和root才能删除，即使这个文件的权限是777。
+**设置：**
+```
+chmod +t dir
+-- 或
+chmod 1777 dir
+-- 其中t=1000
+```
 
 ## sudo
 ## ACL
+Access Control List带来了更加灵活的权限控制，提供了复杂权限控制的能力。
+比如我现在想
 ## Capabilities
 ## SELinux/AppArmor
