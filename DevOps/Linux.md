@@ -579,6 +579,12 @@ ls -l /usr/bin/passwd
 -rwsr-xr-x
 ```
 其中rws中的s就是SUID，SUID的作用是让用户执行文件时直接以文件所有者（Onwer）的权限执行。比如passwd命令需要修改/etc/passwd，这个文件属于root:root，一般用户没有权限修改这个文件，也就不能修改密码，但是通过SUID可以让普通用户也能修改密码。
+**设置SUID**
+```
+chmod u+s file
+-- 或者
+chmod 4755 file
+```
 ### SGID
 
 ### Sticky
