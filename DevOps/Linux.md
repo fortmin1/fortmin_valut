@@ -525,6 +525,7 @@ user:x:1000:1000::/home/user:/bin/bash
 ```
 Linux判断UID=0，就代表root
 ### GID
+用户在创建时默认会创建同名的group。
 Linux不需要每个文件都配置几百个用户，所以有用户组（GID）的概念，一个文件可以被所属组下面所有人访问。
 ![](assets/Linux/file-20260709085820807.png)
 ### Owner
@@ -627,7 +628,10 @@ tom ALL=(ALL) /usr/bin/systemctl
 ```
 sudo systemctl restart nginx
 ```
-不能执行其它操作
+不能执行其它操作。
+**sudo su/su/su - root/sudo -i**
+sudo su中的sudo是以root权限执行，而以su默认等于su root，所以这种情况下不需要输入root的密码只需要输入当前用户的密码。
+su默认就是su root，他和su - root的区别在于前者不会更新环境变量，只会切换UID，所以一般建议执行su - root而不是su/sudo su，如果想要像sudo su一样只输入当前用户密码，又能想su - root一样有完整的root环境，可以使用sudo -i。
 ## ACL
 Access Control List带来了更加灵活的权限控制，提供了复杂权限控制的能力。
 比如我现在想单独允许mysql这个用户访问某个文件夹，不需要改group，只需要：
