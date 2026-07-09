@@ -32,6 +32,7 @@ to be product manager
 2. c learning
 3. networking
 4. database
+5. 
 # Habits
 1. every day before go to sleep, watch back what i've done,write it down!
 2. do it right now,right now
