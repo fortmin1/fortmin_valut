@@ -189,3 +189,8 @@ npx的作用是运行node包中的可执行文件，而不需要全局安装这�
 3. 执行任意npm包：`npx`不仅可以执行在`package.json`的`scripts`部分定义的命令，还可以执行任何npm package。
 4. 执行GitHub gist：`npx`甚至可以执行GitHub gist或者其他公开的JavaScript文件。
 npx 的运行规则和npm 是一样的 本地目录查找.bin 看有没有 如果没有就去全局的node_moduels 查找，如果还没有就去下载这个包然后运行命令，然后删除这个包
+# 发布NPM 包
+1.npm adduser
+2.npm login
+3.npm publish
+# NPM 私服
