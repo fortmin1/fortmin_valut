@@ -60,15 +60,16 @@ console.log(multiply(3, 4)); // 12
 ESM 是 ES6 推出的官方标准，核心是 `export` 和 `import`，**导出的是 “绑定关系”（而非值），支持多种导出形式**。
 ##### （1）核心语法
 
-|操作|语法示例|说明|
-|---|---|---|
-|命名导出（多个）|`export const add = (a,b) => a+b;`|导出单个成员（可多个）|
-|命名导出（批量）|`export { add, User };`|批量导出已定义的成员|
-|默认导出（单个）|`export default function() {};`|每个模块只能有一个默认导出|
-|导入命名成员|`import { add } from './utils.js';`|解构导入命名导出的成员|
-|导入默认成员|`import add from './utils.js';`|导入默认导出的成员|
-|导入整个模块|`import * as utils from './utils.js';`|导入为一个模块对象（所有成员挂在上面）|
-|动态导入|`import('./utils.js').then(utils => {})`|异步导入（运行时执行）|
+| 操作       | 语法示例                                     | 说明                  |
+| -------- | ---------------------------------------- | ------------------- |
+| 命名导出（多个） | `export const add = (a,b) => a+b;`       | 导出单个成员（可多个）         |
+| 命名导出（批量） | `export { add, User };`                  | 批量导出已定义的成员          |
+| 默认导出（单个） | `export default function() {};`          | 每个模块只能有一个默认导出       |
+| 导入命名成员   | `import { add } from './utils.js';`      | 解构导入命名导出的成员         |
+| 导入默认成员   | `import add from './utils.js';`          | 导入默认导出的成员           |
+| 导入整个模块   | `import * as utils from './utils.js';`   | 导入为一个模块对象（所有成员挂在上面） |
+| 动态导入     | `import('./utils.js').then(utils => {})` | 异步导入（运行时执行）         |
+|          |                                          |                     |
 
 ##### （2）导出 / 导入的本质（关键）
 - **导出的是什么**：
