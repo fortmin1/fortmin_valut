@@ -77,7 +77,36 @@ npm install
     ↓
 更新 package-lock.json
 ```
-
+### 读取配置
+```
+npm install
+    ↓
+config
+    ↓
+npm config list
+    ↓
+项目级 .npmrc
+    ↓
+用户级 .npmrc
+    ↓
+全局 .npmrc
+    ↓
+npm 内置 .npmrc
+```
+npm会收集所有配置，按优先级合成一份最终配置，优先级如下：
+```
+命令行参数
+    >
+环境变量
+    >
+项目级 .npmrc
+    >
+用户级 .npmrc
+    >
+全局级 .npmrc
+    >
+npm 内置配置
+```
 ## .npmrc
 ```
 registry=http://registry.npmjs.org/
