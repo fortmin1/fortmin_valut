@@ -20,7 +20,7 @@
 - `npm config list` 用于列出所有的 npm 配置信息。执行该命令可以查看当前系统和用户级别的所有 npm 配置信息，以及当前项目的配置信息（如果在项目目录下执行该命令）
 - `npm get registry` 用于获取当前 npm 配置中的 registry 配置项的值。registry 配置项用于指定 npm 包的下载地址，如果未指定，则默认使用 npm 官方的包注册表地址
 - `npm set registry` `npm config set registry <registry-url>` 命令，将 registry 配置项的值修改为指定的 `<registry-url>` 地址
-# Package.json
+# package.json
 执行npm init 便可以初始化一个package.json
 1. `name`：项目名称，必须是唯一的字符串，通常采用小写字母和连字符的组合。
 2. `version`：项目版本号，通常采用语义化版本号规范。
@@ -48,3 +48,60 @@
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9288120f63cb4736afc2455e679de499~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
 因为B和A所要求的依赖模块不同，（B下要求是v2.0的C，A下要求是v1.0的C ）所以B不能像2中那样复用A下的C v1.0模块 所以如果这种情况还是会出现模块冗余的情况，他就会给B继续搞一层node_modules，就是非扁平化了。
+## 流程
+![](assets/NPM/file-20260715150803582.png)
+## .npmrc
+```
+registry=http://registry.npmjs.org/
+# 定义npm的registry，即npm的包下载源
+
+proxy=http://proxy.example.com:8080/
+# 定义npm的代理服务器，用于访问网络
+
+https-proxy=http://proxy.example.com:8080/
+# 定义npm的https代理服务器，用于访问网络
+
+strict-ssl=true
+# 是否在SSL证书验证错误时退出
+
+cafile=/path/to/cafile.pem
+# 定义自定义CA证书文件的路径
+
+user-agent=npm/{npm-version} node/{node-version} {platform}
+# 自定义请求头中的User-Agent
+
+save=true
+# 安装包时是否自动保存到package.json的dependencies中
+
+save-dev=true
+# 安装包时是否自动保存到package.json的devDependencies中
+
+save-exact=true
+# 安装包时是否精确保存版本号
+
+engine-strict=true
+# 是否在安装时检查依赖的node和npm版本是否符合要求
+
+scripts-prepend-node-path=true
+# 是否在运行脚本时自动将node的路径添加到PATH环境变量中
+
+```
+## package-lock.json
+很多朋友只知道这个东西可以锁定版本记录依赖树详细信息
+- version 该参数指定了当前包的版本号
+- resolved 该参数指定了当前包的下载地址
+- integrity 用于验证包的完整性
+- dev 该参数指定了当前包是一个开发依赖包
+- bin 该参数指定了当前包中可执行文件的路径和名称
+- engines 该参数指定了当前包所依赖的Node.js版本范围
+知识点来了，package-lock.json 帮我们做了缓存，他会通过 `name + version + integrity` 信息生成一个唯一的key，这个key能找到对应的index-v5 下的缓存记录 也就是npm cache 文件夹下的
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c321d177dd445588981a9bb4f719381~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
+如果发现有缓存记录，就会找到tar包的hash值，然后将对应的二进制文件解压到node_modeules
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0023c0c4cbd248ae96d99f7f577e5680~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
+
+  
+
+作者：小满zs  
+链接：https://juejin.cn/post/7261119531891490877  
+来源：稀土掘金  
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
