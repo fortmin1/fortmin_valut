@@ -98,10 +98,3 @@ scripts-prepend-node-path=true
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c321d177dd445588981a9bb4f719381~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 如果发现有缓存记录，就会找到tar包的hash值，然后将对应的二进制文件解压到node_modeules
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0023c0c4cbd248ae96d99f7f577e5680~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
-
-  
-
-作者：小满zs  
-链接：https://juejin.cn/post/7261119531891490877  
-来源：稀土掘金  
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
