@@ -42,17 +42,9 @@
 ## 扁平化
 扁平化只是理想状态如下
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4bc99984ea8a4569bebd8f0630990224~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
-
 **安装某个二级模块时，若发现第一层级有相同名称，相同版本的模块，便直接复用那个模块**
 因为A模块下的C模块被安装到了第一级，这使得B模块能够复用处在同一级下；且名称，版本，均相同的C模块
- 非理想状态下
+非理想状态下
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9288120f63cb4736afc2455e679de499~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
 因为B和A所要求的依赖模块不同，（B下要求是v2.0的C，A下要求是v1.0的C ）所以B不能像2中那样复用A下的C v1.0模块 所以如果这种情况还是会出现模块冗余的情况，他就会给B继续搞一层node_modules，就是非扁平化了。
-
-  
-
-作者：小满zs  
-链接：https://juejin.cn/post/7261119531891490877  
-来源：稀土掘金  
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
