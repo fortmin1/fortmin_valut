@@ -182,3 +182,10 @@ post例如你编写完一个工具发布npm，那就可以在之后写一个ci�
 谁用到了例如vue-cli [github.com/vuejs/vue-c…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fvue-cli%2Fblob%2Fdev%2Fpackage.json "https://github.com/vuejs/vue-cli/blob/dev/package.json")
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e193d239500b43c6885aac43233c6dd1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 # Npx
+npx的作用是运行node包中的可执行文件，而不需要全局安装这个包，它可以避免全局污染的问题，也可以让开发人员使用任意版本的包而不会出现依赖冲突。
+**npx 的优势**
+1. 避免全局安装：`npx`允许你执行npm package，而不需要你先全局安装它。
+2. 总是使用最新版本：如果你没有在本地安装相应的npm package，`npx`会从npm的package仓库中下载并使用最新版。
+3. 执行任意npm包：`npx`不仅可以执行在`package.json`的`scripts`部分定义的命令，还可以执行任何npm package。
+4. 执行GitHub gist：`npx`甚至可以执行GitHub gist或者其他公开的JavaScript文件。
+npx 的运行规则和npm 是一样的 本地目录查找.bin 看有没有 如果没有就去全局的node_moduels 查找，如果还没有就去下载这个包然后运行命令，然后删除这个包
