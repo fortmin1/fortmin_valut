@@ -6,7 +6,41 @@ JS只支持单继承，查找属性/方法，走的是原型链。
 # 模块化
 ## 游览器中的JS
 ### HTML中直接写JS
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo</title>
+</head>
+<body>
 
+    <button onclick="alert('hello')">点击</button>
+
+    <script>
+        console.log("hello JavaScript");
+    </script>
+</body>
+</html>
+```
+**内联脚本**，游览器从上往下解析html，遇到js就直接执行
+### 外部引入JS
+```html
+<html>
+<head>
+    <script src="./main.js"></script>
+</head>
+
+<body>
+    <h1>Hello</h1>
+</body>
+</html>
+```
+顺序执行，遇到js脚本就等待下载，下载完就执行，执行完在继续解析dom，阻塞dom解析。
+多个引入的js按照上面提到的步骤顺序阻塞。
+由于阻塞的特性，一般把引入的js放在
+### defer、async
+### cjs、amd、broswerfiy
+### ESM
 ## CommonJs
 CJS 是 Node.js 的默认模块化方案，核心是 `module.exports` 和 `require`，**所有导出都是 “值的引用”，且导出的是一个对象（或原始值）**。
 ##### （1）核心语法
@@ -103,6 +137,10 @@ import * as utils from './utils.js';
 console.log(utils.version); // '1.0'
 console.log(utils.default(3, 4)); // 12（默认导出在 default 属性里）
 ```
+
+# 原型链
+# 闭包
+# EventLoop
 # Promise
 # WebComponent
 # WASM
