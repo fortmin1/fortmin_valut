@@ -95,17 +95,12 @@ schema是数据库内部的**逻辑命名空间**
 ## 三、分层权限：角色控制四层权限（从粗到细）
 
 ### 层级 1：数据库级权限（连接、创建 schema）
-
 控制角色能不能进库、能不能新建 schema：
-
-表格
 
 |权限|作用|
 |---|---|
 |CONNECT|允许角色登录连接该数据库|
 |CREATE|允许在库内新建 Schema|
-
-sql
 
 ```
 GRANT CONNECT, CREATE ON DATABASE test_db TO app_group;
@@ -115,8 +110,6 @@ GRANT CONNECT, CREATE ON DATABASE test_db TO app_group;
 
 Schema 自身的权限，**不控制表数据，只控制能不能进文件夹、新建对象**
 
-sql
-
 ```
 GRANT USAGE, CREATE ON SCHEMA biz TO app_group;
 ```
@@ -124,8 +117,6 @@ GRANT USAGE, CREATE ON SCHEMA biz TO app_group;
 1. `USAGE`（必选）：允许角色查看 schema 内所有对象、访问内部表 / 视图；无 USAGE 则 schema 内所有对象完全不可见；
 2. `CREATE`：允许角色在该 schema 下新建表、视图、函数等对象；
 3. 回收示例：
-
-sql
 
 ```
 REVOKE CREATE ON SCHEMA biz FROM app_group;
@@ -136,8 +127,6 @@ REVOKE CREATE ON SCHEMA biz FROM app_group;
 ### 层级 3：表 / 视图 / 函数 对象级权限（单表 CRUD）
 
 Schema 有 USAGE 后，再单独授予每张表的操作权限，控制整表读写：
-
-sql
 
 ```
 -- 给组授予biz下所有表查询、新增、修改、删除
@@ -161,15 +150,11 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA biz GRANT SELECT,INSERT,UPDATE,DELETE TO app_
 PostgreSQL 支持**列粒度独立权限**，同一表不同字段授予不同角色，优先级高于表权限。
 
 #### 语法规则
-
-sql
-
 ```
 GRANT 权限(字段1,字段2) ON 表 TO 角色;
 ```
 
 仅支持 `SELECT / INSERT / UPDATE` 三类列权限（DELETE 无列概念，不能按列控制删除）
-
 #### 示例 1：只能查询姓名，不能查手机号、身份证
 
 sql
@@ -182,9 +167,6 @@ GRANT SELECT(name) ON biz.user_info TO read_user;
 此时执行 `SELECT * FROM biz.user_info` 会报错，只能指定 `name` 字段查询。
 
 #### 示例 2：仅允许修改姓名，不能修改金额
-
-sql
-
 ```
 GRANT UPDATE(name) ON biz.account TO op_user;
 ```
@@ -192,9 +174,6 @@ GRANT UPDATE(name) ON biz.account TO op_user;
 执行 `UPDATE set amount=100` 会权限拒绝，只能更新 name。
 
 #### 示例 3：插入时仅能填写基础字段，敏感字段禁止写入
-
-sql
-
 ```
 GRANT INSERT(id,name) ON biz.user_info TO reg_user;
 ```
@@ -206,9 +185,6 @@ GRANT INSERT(id,name) ON biz.user_info TO reg_user;
 1. 若授予**整表 SELECT**：所有列自动可读；
 2. 若仅授予**部分列 SELECT**：仅指定列可读，其余列无权限；
 3. 先授予整表权限，再回收单列权限：
-
-sql
-
 ```
 GRANT SELECT ON biz.user_info TO app_user;
 REVOKE SELECT(phone,id_card) ON biz.user_info FROM app_user;
@@ -222,8 +198,6 @@ REVOKE SELECT(phone,id_card) ON biz.user_info FROM app_user;
 
 #### 1. 创建分组角色（无登录，统一管理权限）
 
-sql
-
 ```
 -- 分组角色，承载所有权限，不直接登录
 CREATE ROLE biz_admin_group;
@@ -232,9 +206,6 @@ CREATE ROLE biz_read_group;
 ```
 
 #### 2. 创建可登录用户，关联对应分组（继承权限）
-
-sql
-
 ```
 CREATE USER admin1 LOGIN PASSWORD '123456';
 CREATE USER op1 LOGIN PASSWORD '123456';
@@ -252,9 +223,6 @@ ALTER ROLE read1 SET search_path = biz, public;
 ```
 
 #### 3. 数据库层权限
-
-sql
-
 ```
 GRANT CONNECT ON DATABASE biz_db TO biz_admin_group, biz_op_group, biz_read_group;
 -- 管理员允许新建schema
@@ -262,9 +230,6 @@ GRANT CREATE ON DATABASE biz_db TO biz_admin_group;
 ```
 
 #### 4. Schema 层权限（核心配合点）
-
-sql
-
 ```
 -- 管理员：可进入schema、新建表
 GRANT USAGE, CREATE ON SCHEMA biz TO biz_admin_group;
@@ -275,9 +240,6 @@ GRANT USAGE ON SCHEMA biz TO biz_op_group, biz_read_group;
 > 若不给 `USAGE`，后续所有表权限全部失效，角色看不到 schema 内任何表。
 
 #### 5. 表级权限分配
-
-sql
-
 ```
 -- 管理员：全部操作权限
 GRANT ALL ON ALL TABLES IN SCHEMA biz TO biz_admin_group;
@@ -288,9 +250,6 @@ GRANT SELECT ON ALL TABLES IN SCHEMA biz TO biz_read_group;
 ```
 
 #### 6. 列级精细化控制（敏感字段隔离）
-
-sql
-
 ```
 -- 只读账号禁止查看身份证、手机号
 REVOKE SELECT(phone,id_card) ON biz.user_info FROM biz_read_group;
