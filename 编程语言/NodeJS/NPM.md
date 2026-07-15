@@ -39,6 +39,11 @@
 # NPM install
 > 首先安装的依赖都会存放在根目录的node_modules,默认采用扁平化的方式安装，并且排序规则.bin第一个然后@系列，再然后按照首字母排序abcd等，并且使用的算法是广度优先遍历，在遍历依赖树时，npm会首先处理项目根目录下的依赖，然后逐层处理每个依赖包的依赖，直到所有依赖都被处理完毕。在处理每个依赖时，npm会检查该依赖的版本号是否符合依赖树中其他依赖的版本要求，如果不符合，则会尝试安装适合的版本
 ![](assets/NPM/file-20260714223148648.png)
+
+**版本范围**：
+- "x.x.x"，精确版本
+- "~x.x.x"，允许到下一个次版本之前
+- "^x.x.x"，允许到下一个大版本之前
 ## 扁平化
 扁平化只是理想状态如下
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4bc99984ea8a4569bebd8f0630990224~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
@@ -50,6 +55,29 @@
 因为B和A所要求的依赖模块不同，（B下要求是v2.0的C，A下要求是v1.0的C ）所以B不能像2中那样复用A下的C v1.0模块 所以如果这种情况还是会出现模块冗余的情况，他就会给B继续搞一层node_modules，就是非扁平化了。
 ## 流程
 ![](assets/NPM/file-20260715150803582.png)
+整体流程：
+```
+npm install
+    ↓
+读取 npm 配置
+    ↓
+读取 package.json / package-lock.json
+    ↓
+计算“理想依赖树”
+    ↓
+检查现有 node_modules
+    ↓
+从缓存或远程仓库获取包
+    ↓
+校验包完整性
+    ↓
+解压并构建 node_modules
+    ↓
+执行生命周期脚本
+    ↓
+更新 package-lock.json
+```
+
 ## .npmrc
 ```
 registry=http://registry.npmjs.org/
