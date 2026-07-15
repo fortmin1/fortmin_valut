@@ -55,57 +55,67 @@
 因为B和A所要求的依赖模块不同，（B下要求是v2.0的C，A下要求是v1.0的C ）所以B不能像2中那样复用A下的C v1.0模块 所以如果这种情况还是会出现模块冗余的情况，他就会给B继续搞一层node_modules，就是非扁平化了。
 ## 流程
 ![](assets/NPM/file-20260715150803582.png)
-整体流程：
 ```
-npm install
-    ↓
-读取 npm 配置
-    ↓
-读取 package.json / package-lock.json
-    ↓
-计算“理想依赖树”
-    ↓
-检查现有 node_modules
-    ↓
-从缓存或远程仓库获取包
-    ↓
-校验包完整性
-    ↓
-解压并构建 node_modules
-    ↓
-执行生命周期脚本
-    ↓
-更新 package-lock.json
-```
-### 读取配置
-```
-npm install
-    ↓
-config
-    ↓
-npm config list
-    ↓
-项目级 .npmrc
-    ↓
-用户级 .npmrc
-    ↓
-全局 .npmrc
-    ↓
-npm 内置 .npmrc
-```
-npm会收集所有配置，按优先级合成一份最终配置，优先级如下：
-```
-命令行参数
-    >
-环境变量
-    >
-项目级 .npmrc
-    >
-用户级 .npmrc
-    >
-全局级 .npmrc
-    >
-npm 内置配置
+执行 npm install
+    │
+    ├─ 1. 解析命令参数
+    │      npm install
+    │      npm install axios
+    │      npm install --production
+    │
+    ├─ 2. 合并 npm 配置
+    │      命令行参数
+    │      环境变量
+    │      项目级 .npmrc
+    │      用户级 .npmrc
+    │      全局级 .npmrc
+    │      npm 内置默认值
+    │
+    ├─ 3. 读取项目状态
+    │      package.json
+    │      package-lock.json
+    │      node_modules
+    │      node_modules/.package-lock.json
+    │
+    ├─ 4. 计算理想依赖树
+    │      解析语义化版本
+    │      处理直接依赖
+    │      处理传递依赖
+    │      处理 peerDependencies
+    │      处理 optionalDependencies
+    │      去重、提升、嵌套
+    │
+    ├─ 5. 与实际依赖树比较
+    │      哪些需要新增
+    │      哪些需要升级
+    │      哪些需要删除
+    │      哪些可以保留
+    │
+    ├─ 6. 获取包内容
+    │      优先检查本地缓存
+    │      缓存不存在则访问 registry
+    │      下载 tarball
+    │
+    ├─ 7. 完整性校验
+    │      对比 integrity
+    │
+    ├─ 8. 修改 node_modules
+    │      解压
+    │      创建目录
+    │      创建 .bin
+    │      调整依赖层级
+    │
+    ├─ 9. 执行生命周期脚本
+    │      preinstall
+    │      install
+    │      postinstall
+    │      prepare 等
+    │
+    ├─ 10. 更新锁文件
+    │       package-lock.json
+    │       node_modules/.package-lock.json
+    │
+    └─ 11. 可选的安全审计和输出安装结果
 ```
 ## .npmrc
 ```
