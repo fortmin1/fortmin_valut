@@ -30,7 +30,7 @@ CJS 是 Node.js 的默认模块化方案，核心是 `module.exports` 和 `requi
     - `require()` 函数执行时，会读取目标文件的代码，**执行**后返回 `module.exports` 的值；
     - 导入的是**值的引用**（运行时确定），如果导出的值后续被修改，导入方也会看到变化。    
 ##### （3）完整示例
-```
+```js
 // utils.js (CJS 模块)
 // 定义内部变量
 const version = '1.0';
@@ -80,7 +80,7 @@ ESM 是 ES6 推出的官方标准，核心是 `export` 和 `import`，**导出�
     - 导入的是**绑定关系**（而非值的拷贝），且导入的成员是只读的（不能修改导入的变量）；
     - 模块对象（`import * as utils`）是只读的，不能修改其属性。    
 ##### （3）完整示例
-```
+```js
 // utils.js (ESM 模块)
 // 命名导出
 export const version = '1.0';
