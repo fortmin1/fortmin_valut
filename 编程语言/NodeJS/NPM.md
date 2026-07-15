@@ -165,3 +165,19 @@ scripts-prepend-node-path=true
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c321d177dd445588981a9bb4f719381~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 如果发现有缓存记录，就会找到tar包的hash值，然后将对应的二进制文件解压到node_modeules
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0023c0c4cbd248ae96d99f7f577e5680~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
+# Npm run
+- 先从当前项目的node_modules/.bin去查找可执行命令vite
+- 如果没找到就去全局的node_modules 去找可执行命令vite
+- 如果还没找到就去环境变量查找
+- 再找不到就进行报错
+## 生命周期
+```json
+    "predev": "node prev.js",
+    "dev": "node index.js",
+    "postdev": "node post.js"
+```
+执行 npm run dev 命令的时候 predev 会自动执行 他的生命周期是在dev之前执行，然后执行dev命令，再然后执行postdev，也就是dev之后执行
+运用场景例如npm run build 可以在打包之后删除dist目录等等
+post例如你编写完一个工具发布npm，那就可以在之后写一个ci脚本顺便帮你推送到git等等
+谁用到了例如vue-cli [github.com/vuejs/vue-c…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fvue-cli%2Fblob%2Fdev%2Fpackage.json "https://github.com/vuejs/vue-cli/blob/dev/package.json")
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e193d239500b43c6885aac43233c6dd1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
