@@ -1,8 +1,11 @@
+
 # 面向对象编程
+## Class
 ## 继承与Mixin
 JS只支持单继承，查找属性/方法，走的是原型链。
 # 模块化
 ## 游览器中的JS
+### HTML中直接写JS
 
 ## CommonJs
 CJS 是 Node.js 的默认模块化方案，核心是 `module.exports` 和 `require`，**所有导出都是 “值的引用”，且导出的是一个对象（或原始值）**。
@@ -100,3 +103,6 @@ import * as utils from './utils.js';
 console.log(utils.version); // '1.0'
 console.log(utils.default(3, 4)); // 12（默认导出在 default 属性里）
 ```
+# Promise
+# WebComponent
+# WASM
