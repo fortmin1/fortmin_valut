@@ -13,13 +13,13 @@ JS只支持单继承，查找属性/方法，走的是原型链。
 CJS 是 Node.js 的默认模块化方案，核心是 `module.exports` 和 `require`，**所有导出都是 “值的引用”，且导出的是一个对象（或原始值）**。
 ##### （1）核心语法
 
-|操作|语法示例|说明|
-|---|---|---|
-|导出单个值|`module.exports = 123;`|直接导出原始值（覆盖默认导出对象）|
-|导出多个值|`module.exports = { add, User };`|导出一个对象，包含多个成员|
-|便捷导出|`exports.add = (a,b) => a+b;`|`exports` 是 `module.exports` 的引用|
-|导入|`const { add } = require('./utils');`|同步导入，解构导出对象的成员|
-|导入整个模块|`const utils = require('./utils');`|导入导出的完整对象|
+| 操作     | 语法示例                                  | 说明                               |
+| ------ | ------------------------------------- | -------------------------------- |
+| 导出单个值  | `module.exports = 123;`               | 直接导出原始值（覆盖默认导出对象）                |
+| 导出多个值  | `module.exports = { add, User };`     | 导出一个对象，包含多个成员                    |
+| 便捷导出   | `exports.add = (a,b) => a+b;`         | `exports` 是 `module.exports` 的引用 |
+| 导入     | `const { add } = require('./utils');` | 同步导入，解构导出对象的成员                   |
+| 导入整个模块 | `const utils = require('./utils');`   | 导入导出的完整对象                        |
 
 ##### （2）导出 / 导入的本质（关键）
 - **导出的是什么**：
