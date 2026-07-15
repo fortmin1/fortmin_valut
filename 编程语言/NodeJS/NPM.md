@@ -181,3 +181,4 @@ scripts-prepend-node-path=true
 post例如你编写完一个工具发布npm，那就可以在之后写一个ci脚本顺便帮你推送到git等等
 谁用到了例如vue-cli [github.com/vuejs/vue-c…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Fvue-cli%2Fblob%2Fdev%2Fpackage.json "https://github.com/vuejs/vue-cli/blob/dev/package.json")
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e193d239500b43c6885aac43233c6dd1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
+# Npx
