@@ -1,0 +1,1 @@
+LINK:https://chatgpt.com/s/t_6a5f825b64308191a861e0591ad31b26
