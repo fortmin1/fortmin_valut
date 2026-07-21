@@ -68,6 +68,8 @@ SELECT uploader_ip,
 -- 先把所有数组合并成一个大数组，再转为字符串 
 array_to_string(array_agg(unnest_tags), ', ') FROM ( SELECT uploader_ip, unnest(tags) AS unnest_tags FROM file_details ) t GROUP BY uploader_ip;
 ```
+# 单表查询
+# 多表关系
 # SQL
 ## DDL
 ## DML
