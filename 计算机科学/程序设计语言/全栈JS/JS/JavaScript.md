@@ -2,6 +2,12 @@
 列举几个重要函数
 ## 箭头函数
 # 原型与原型链
+记住这几点，忘记一切混乱：
+0. foo.proto=Foo.prototype
+1. 所有属性都是从proto上找，当前对象没有就去当前对象的proto对应Foo.prototype，Foo.prototype也是个对象，同理它找不到这个属性就要去它的proto找。
+2. 区别Foo.proto和Foo.prototype，前者从函数本身是对象的角度看，值是Function.prototype，后者是一个Magic 对象，不由我们创造，追其溯源，是Object对象，所以Foo.prototype.proto=Object.prototype
+3. Function.proto=Function.prototype
+4. 虽然逻辑上Object是一个函数，但是它不由Function,反过来Function是由它创造，所以Object.proto
 ![](assets/JavaScript/file-20260722232633343.png)
 ## prototype,proto,constructor
 prototype是函数才有的一个属性，这个属性指向一个对象，用这个函数创建的对象其原型（proto）就是这个对象，默认是Object空对象。
