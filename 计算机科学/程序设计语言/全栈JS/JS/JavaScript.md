@@ -5,14 +5,25 @@ prototype是函数才有的一个属性，这个属性指向一个对象，用�
 在js中函数也是一个对象，所以他也有proto：Function.prototype
 - 那么对于Function这个特殊的函数，同时也是一个对象，它的proto是谁，是它自己。
 - 再继续追溯Function.prototype.proto，我们会得到Object函数，它的proto是null，没有人创造它。
+- 实例对象和构造函数都有属性指向原型(proto和prototype)，那么原型能不能反过来指向实例对象或者构造函数呢，原型中有一个属性constructor可以指向构造函数，constructor属性其实就是一个拿来保持自己构造函数的引用的对象，没有什么特别的地方。
 ![](assets/JavaScript/file-20260722234217226.png)
 ```js
 Person <===> Person.prototype.constructor
 person.__proto__ <===> Person.prototype <===> new Person() 
 Object.getPrototypeOf(person) <===> Person.prototype
 ```
-## 
-
+## 原型链
+虽然JS的原型系统感觉有点混乱，但是我们只要记住一条原则：
+属性永远从proto上找，自己的proto找不到，就从自己proto的proto找，这就是原型链。
+一个复杂的点就是prototype，但是只需要将其理解为一种模版手段。
+![](assets/JavaScript/file-20260722234821435.png)
+```js
+/**
+ * person 上没有 constructor 属性，所以就通过 person.__proto__ 去原型对象中找，
+ * 刚好 Person.prototype 这个原型对象中有 constructor
+*/
+person.constructor <===> Person.prototype.constructor <===> Persion 
+```
 
 
 
