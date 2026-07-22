@@ -1,7 +1,10 @@
 # 原型与原型链
 ![](assets/JavaScript/file-20260722232633343.png)
 ## prototype
-# _proto_
+prototype是函数才有的一个属性，这个属性指向一个对象，用这个函数创建的对象其原型（proto）就是这个对象，默认是Object空对象。
+在js中函数也是一个对象，所以他也有proto：Function.prototype
+那么对于Function这个特殊的函数，同时也是一个对象，它的proto是谁，是它自己。
+# proto
 
 
 # 面向对象编程
