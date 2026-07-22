@@ -1,6 +1,36 @@
 
 # 面向对象编程
+## 原型
+```js
+const user = {
+    name: "Tom",
+    sayHello() {
+        console.log("Hello");
+    }
+}
+```
 ## Class
+```js
+class User {
+
+    constructor(name){
+        this.name=name;
+    }
+
+
+    sayHello(){
+        console.log(
+            "Hello "+this.name
+        );
+    }
+
+}
+
+
+const user=new User("Tom");
+
+user.sayHello();
+```
 ## 继承与Mixin
 JS只支持单继承，查找属性/方法，走的是原型链。
 # 模块化
