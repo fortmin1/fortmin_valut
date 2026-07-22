@@ -1,5 +1,9 @@
 # 原型与原型链
 ![](assets/JavaScript/file-20260722232633343.png)
+## prototype
+# _proto_
+
+
 # 面向对象编程
 ## 原型
 ```js
