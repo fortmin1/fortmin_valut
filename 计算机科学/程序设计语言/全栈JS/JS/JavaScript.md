@@ -1,9 +1,12 @@
+# 函数
+列举几个重要函数
+## 箭头函数
 # 原型与原型链
 ![](assets/JavaScript/file-20260722232633343.png)
 ## prototype,proto,constructor
 prototype是函数才有的一个属性，这个属性指向一个对象，用这个函数创建的对象其原型（proto）就是这个对象，默认是Object空对象。
 在js中函数也是一个对象，所以他也有proto：Function.prototype
-- 那么对于Function这个特殊的函数，同时也是一个对象，它的proto是谁，是它自己。
+- 那么对于Function这个特殊的函数，同时也是一个对象，它的proto是谁，是它自己，这不是鸡生蛋问题，它们俩都是只是一个地址的引用。
 - 再继续追溯Function.prototype.proto，我们会得到Object函数，它的proto是null，没有人创造它。
 - 实例对象和构造函数都有属性指向原型(proto和prototype)，那么原型能不能反过来指向实例对象或者构造函数呢，原型中有一个属性constructor可以指向构造函数，constructor属性其实就是一个拿来保持自己构造函数的引用的对象，没有什么特别的地方。
 ![](assets/JavaScript/file-20260722234217226.png)
@@ -15,7 +18,8 @@ Object.getPrototypeOf(person) <===> Person.prototype
 ## 原型链
 虽然JS的原型系统感觉有点混乱，但是我们只要记住一条原则：
 属性永远从proto上找，自己的proto找不到，就从自己proto的proto找，这就是原型链。
-一个复杂的点就是prototype，但是只需要将其理解为一种模版手段。
+一个复杂的点就是prototype，prototype的复杂性在于，按照惯性思维实例对象的proto应该是它的模板，一般会直观的想到对应的构造函数，这和静态面向对象的Class一样，符合直觉。
+js的原型反直觉的是实例对象的proto是其构造函数的prototype，而不是构造函数本身。
 ![](assets/JavaScript/file-20260722234821435.png)
 ```js
 /**
