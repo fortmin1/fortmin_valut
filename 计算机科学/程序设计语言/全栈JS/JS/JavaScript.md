@@ -1,11 +1,17 @@
 # 原型与原型链
 ![](assets/JavaScript/file-20260722232633343.png)
-## prototype，proto
+## prototype,proto,constructor
 prototype是函数才有的一个属性，这个属性指向一个对象，用这个函数创建的对象其原型（proto）就是这个对象，默认是Object空对象。
 在js中函数也是一个对象，所以他也有proto：Function.prototype
 - 那么对于Function这个特殊的函数，同时也是一个对象，它的proto是谁，是它自己。
 - 再继续追溯Function.prototype.proto，我们会得到Object函数，它的proto是null，没有人创造它。
-## constructor
+![](assets/JavaScript/file-20260722234217226.png)
+```js
+Person <===> Person.prototype.constructor
+person.__proto__ <===> Person.prototype <===> new Person() 
+Object.getPrototypeOf(person) <===> Person.prototype
+```
+## 
 
 
 
