@@ -9,7 +9,7 @@
 2. 区别Foo.proto和Foo.prototype，前者从函数本身是对象的角度看，值是Function.prototype，后者是一个Magic 对象，不由我们创造，追其溯源，是Object对象，所以Foo.prototype.proto=Object.prototype
 3. Function.proto=Function.prototype
 4. Object.proto=Function.prototype
-5. Object.prototype=
+5. Object.prototype.proto=null
 ![](assets/JavaScript/file-20260722232633343.png)
 ## prototype,proto,constructor
 prototype是函数才有的一个属性，这个属性指向一个对象，用这个函数创建的对象其原型（proto）就是这个对象，默认是Object空对象。
