@@ -12,6 +12,7 @@ const user = {
 ## Class
 ```js
 class User {
+	static count = 0;
 
     constructor(name){
         this.name=name;
