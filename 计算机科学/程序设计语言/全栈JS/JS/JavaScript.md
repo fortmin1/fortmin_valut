@@ -80,6 +80,7 @@ LINK:https://chatgpt.com/share/6a62157b-67f4-83ec-a75a-4d6ba15ee451
 https://www.doubao.com/thread/xtGP0qNrY1nfb3KSQ
 ## 游览器中的JS
 ### HTML中直接写JS
+
 ```html
 <!DOCTYPE html>
 <html>
