@@ -270,8 +270,6 @@ import * as utils from './utils.js';
 console.log(utils.version); // '1.0'
 console.log(utils.default(3, 4)); // 12（默认导出在 default 属性里）
 ```
-
-# 原型链
 # 闭包
 # EventLoop
 # Promise
