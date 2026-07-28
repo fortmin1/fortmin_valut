@@ -35,6 +35,7 @@ to be product manager
 4. database
 5. ts pratice/frontend learning
 # Habits
+0. write down any problems,ideas,to dos right now
 1. every day before go to sleep, watch back what i've done,write it down!
 2. do it right now,right now
 3. don‘t fragment your time!
