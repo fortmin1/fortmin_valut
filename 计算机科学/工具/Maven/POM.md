@@ -103,3 +103,7 @@ mvn help:effective-settings
 - dependencies：导入第三方库，只拿库，不继承库的配置
 - pom：项目源代码一部分；settings：本机电脑的环境变量。
 - mirror：网络代理，不改配置文件，只是访问的时候转发请求。
+# 附录：POM配置项
+```
+
+```
