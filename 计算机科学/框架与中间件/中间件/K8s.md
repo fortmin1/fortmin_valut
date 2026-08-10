@@ -1,3 +1,4 @@
+LINK:https://chatgpt.com/share/6a794651-f280-83ec-9c4d-f6fc16a361b6
 # 核心概念
 ## Pod
 k8s最小的调度单位。一个Pod可以包含一个或多个紧密协作的容器（共享网络和存储）。
