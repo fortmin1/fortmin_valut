@@ -1,3 +1,4 @@
+
 | 后缀              | 通常表示什么                     |
 | --------------- | -------------------------- |
 | `.crt`          | 通常是证书                      |
@@ -11,43 +12,34 @@
 
 ## pem
 一个 PEM 证书：
-
 ```
 -----BEGIN CERTIFICATE-----
 MIIF...
 ...
 -----END CERTIFICATE-----
 ```
-
 一个 PEM 私钥：
-
 ```
 -----BEGIN PRIVATE KEY-----
 MIIE...
 ...
 -----END PRIVATE KEY-----
 ```
-
 RSA 私钥也可能是：
-
 ```
 -----BEGIN RSA PRIVATE KEY-----
 MIIE...
 ...
 -----END RSA PRIVATE KEY-----
 ```
-
 公钥：
-
 ```
 -----BEGIN PUBLIC KEY-----
 MIIB...
 ...
 -----END PUBLIC KEY-----
 ```
-
 甚至一个 `.pem` 文件里可以同时放多个证书：
-
 ```
 -----BEGIN CERTIFICATE-----
 服务器证书
@@ -61,79 +53,54 @@ MIIB...
 中间CA证书2
 -----END CERTIFICATE-----
 ```
-
 这就是很多 `fullchain.pem` 的内容。
-
 所以：
-
 ```
 .pem
 ```
-
 更多是在说：
-
 > 这是 Base64 + BEGIN/END 头尾包起来的文本格式。
-
 ## crt
 `.crt` 通常表示：
-
 ```
 certificate
 ```
-
 也就是“这是一个证书文件”。
-
 但 `.crt` 文件内部可能有两种编码。
-
 一种是 PEM：
-
 ```
 -----BEGIN CERTIFICATE-----
 MIIF...
 -----END CERTIFICATE-----
 ```
-
 这种本质上：
-
 ```
 内容：X.509 certificate
 编码：PEM
 扩展名：.crt
 ```
-
 另一种是 DER 二进制：
-
 ```
 一堆二进制字节
 ```
-
 本质上：
-
 ```
 内容：X.509 certificate
 编码：DER
 扩展名：.crt
 ```
-
 所以：
-
 > `.crt` 更多在表达“内容是证书”，而不严格表达编码方式。
-
 `.cer` 也是类似的，通常也是证书。
-
 Windows 世界比较常见：
-
 ```
 .cer
 ```
-
 Linux/Nginx 世界比较常见：
-
 ```
 .crt
 .pem
 ```
-
 但从技术上来说，后缀没有强制标准。
 ## key
 `.key` 一般表示：
@@ -225,31 +192,22 @@ tomcat.keystore
 `.keystore` 并不是一个标准格式名字。
 只是文件名。
 里面实际可能是：
-
 ```
 JKS
 ```
-
 也可能是：
-
 ```
 PKCS12
 ```
-
 所以要真正判断：
-
 ```
 keytool -list -v -keystore tomcat.keystore
 ```
-
 看：
-
 ```
 Keystore type: PKCS12
 ```
-
 或者：
-
 ```
 Keystore type: JKS
 ```
