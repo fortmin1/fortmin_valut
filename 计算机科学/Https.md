@@ -1,0 +1,11 @@
+```
+.pem
+.crt
+.key
+```
+```
+.p12
+.pfx
+.jks
+.keystore
+```
