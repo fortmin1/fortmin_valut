@@ -93,12 +93,12 @@ PREROUTING → INPUT → [本机进程] → OUTPUT → POSTROUTING
 
 ### 四张表（按优先级排列）
 
-| 表 | 用途 | 常用链 |
-|---|---|---|
-| **raw** | 关闭连接追踪（NOTRACK） | PREROUTING, OUTPUT |
-| **mangle** | 修改数据包头部（TTL、TOS 等） | 全部五链 |
-| **nat** | 地址转换（DNAT/SNAT） | PREROUTING, OUTPUT, POSTROUTING |
-| **filter** | 过滤放行/拒绝（最常用） | INPUT, FORWARD, OUTPUT |
+| 表          | 用途                 | 常用链                             |
+| ---------- | ------------------ | ------------------------------- |
+| **raw**    | 关闭连接追踪（NOTRACK）    | PREROUTING, OUTPUT              |
+| **mangle** | 修改数据包头部（TTL、TOS 等） | 全部五链                            |
+| **nat**    | 地址转换（DNAT/SNAT）    | PREROUTING, OUTPUT, POSTROUTING |
+| **filter** | 过滤放行/拒绝（最常用）       | INPUT, FORWARD, OUTPUT          |
 
 ### 五条链
 
@@ -237,13 +237,13 @@ ufw allow from 192.168.1.0/24 to any port 22
 
 ## 六、工具选择建议
 
-| 场景 | 推荐 |
-|---|---|
-| Ubuntu 个人服务器 | **ufw**（最简单） |
-| RHEL/CentOS 生产服务器 | **firewalld**（Zone 管理方便） |
+| 场景                 | 推荐                          |
+| ------------------ | --------------------------- |
+| Ubuntu 个人服务器       | **ufw**（最简单）                |
+| RHEL/CentOS 生产服务器  | **firewalld**（Zone 管理方便）    |
 | 需要精细控制（NAT、mangle） | **iptables** 或 **nftables** |
-| 新项目，长期维护 | **nftables**（未来方向） |
-| 容器/云环境 | 用云平台安全组 + 轻量主机防火墙 |
+| 新项目，长期维护           | **nftables**（未来方向）          |
+| 容器/云环境             | 用云平台安全组 + 轻量主机防火墙           |
 
 > **Netfilter** 是内核引擎，**iptables/nftables** 是底层配置工具，**ufw/firewalld** 是上层简化封装。选哪个取决于你的发行版和需求复杂度。
 
