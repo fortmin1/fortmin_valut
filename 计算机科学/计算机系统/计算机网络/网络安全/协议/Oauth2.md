@@ -9,6 +9,17 @@ oatuh2就是一种授权机制，数据的所有者告诉系统同意第三方�
 - 密码式（password）：
 - 客户端凭证（client credentials）
 不论哪一种方式，三方应用都需要提前在客户端中进行备案，提前获得client_id和client_secret用于后续的授权，其实这两个信息就可以看作特殊的账号密码，只不过只能用来获取授权。
+现在开发新系统时，通常可以理解为：
+```
+用户参与的登录/授权
+    ↓
+Authorization Code + PKCE   ← 首选
+
+服务与服务之间
+    ↓
+Client Credentials
+```
+`Implicit` 和 `Password` 模式已经不推荐用于新系统了。
 # 授权码
 授权码模式的核心就是先获取一个授权码，再用授权码、client_id、client_secret来请求token。
 授权码的作用体现在：
