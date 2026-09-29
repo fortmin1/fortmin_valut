@@ -160,3 +160,32 @@ Kubernetes 也是 C/S 架构，由 **Control Plane (控制平面)** 和 **Worker
     
 - **Worker Node**：负责干活 (Kubelet，Kube-proxy，Container Runtime)
 kubectl → Kubernetes API Server → Kubernetes 控制面 → Worker 节点
+
+```
+                  Kubernetes Cluster
+
+          ┌──────────────────────────┐
+          │      Control Plane       │
+          │       控制平面 / Master    │
+          │                          │
+          │ kube-apiserver           │
+          │ kube-scheduler           │
+          │ controller-manager       │
+          │ etcd                     │
+          └────────────┬─────────────┘
+                       │
+                       │ 管理
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+
+   Worker 01       Worker 02       Worker 03
+
+ ┌────────────┐  ┌────────────┐  ┌────────────┐
+ │ kubelet    │  │ kubelet    │  │ kubelet    │
+ │ kube-proxy │  │ kube-proxy │  │ kube-proxy │
+ │ containerd │  │ containerd │  │ containerd │
+ │            │  │            │  │            │
+ │ Pod Pod    │  │ Pod Pod    │  │ Pod Pod    │
+ └────────────┘  └────────────┘  └────────────┘
+```
