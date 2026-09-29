@@ -159,3 +159,4 @@ Kubernetes 也是 C/S 架构，由 **Control Plane (控制平面)** 和 **Worker
 - **Control Plane**：负责决策 (API Server，Scheduler，Controller Manager，etcd)
     
 - **Worker Node**：负责干活 (Kubelet，Kube-proxy，Container Runtime)
+kubectl → Kubernetes API Server → Kubernetes 控制面 → Worker 节点
