@@ -175,6 +175,7 @@ topologySpreadConstraints
 - etcd:Kubernetes 的数据库。保存：
 Node 信息 Pod 信息 Deployment 信息 Service 信息 ConfigMap Secret Namespace RBAC 集群配置 ……
 - controller-manager：Kubernetes 的“巡检 + 自动纠偏系统”。
+- kube-proxy：Kubernetes Service 网络转发。
 
 ```
                   Kubernetes Cluster
@@ -203,4 +204,42 @@ Node 信息 Pod 信息 Deployment 信息 Service 信息 ConfigMap Secret Namespa
  │            │  │            │  │            │
  │ Pod Pod    │  │ Pod Pod    │  │ Pod Pod    │
  └────────────┘  └────────────┘  └────────────┘
+```
+大致流程：
+```
+kubectl
+   │
+   ▼
+kube-apiserver
+   │
+   ▼
+etcd
+保存：
+我需要 3 个 Pod
+   │
+   ▼
+Deployment Controller
+发现：
+当前 0
+期望 3
+   │
+   ▼
+创建 3 个 Pod
+   │
+   ▼
+Scheduler
+决定：
+
+Pod1 → worker01
+Pod2 → worker03
+Pod3 → worker04
+   │
+   ▼
+每个 Worker kubelet
+   │
+   ▼
+containerd
+   │
+   ▼
+创建容器
 ```
