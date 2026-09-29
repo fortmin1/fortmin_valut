@@ -157,9 +157,24 @@ spec:
 Kubernetes 也是 C/S 架构，由 **Control Plane (控制平面)** 和 **Worker Node (工作节点)** 组成：
 
 - **Control Plane**：负责决策 (API Server，Scheduler，Controller Manager，etcd)
-    
 - **Worker Node**：负责干活 (Kubelet，Kube-proxy，Container Runtime)
-kubectl → Kubernetes API Server → Kubernetes 控制面 → Worker 节点
+- kube-scheduler 是什么:scheduler 会综合判断：
+```
+CPU request
+Memory request
+nodeSelector
+nodeAffinity
+podAffinity
+podAntiAffinity
+taint
+toleration
+topologySpreadConstraints
+已有 Pod 分布
+```
+- kubectl → Kubernetes API Server → Kubernetes 控制面 → Worker 节点
+- etcd:Kubernetes 的数据库。保存：
+Node 信息 Pod 信息 Deployment 信息 Service 信息 ConfigMap Secret Namespace RBAC 集群配置 ……
+- controller-manager：Kubernetes 的“巡检 + 自动纠偏系统”。
 
 ```
                   Kubernetes Cluster
