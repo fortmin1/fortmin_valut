@@ -10,6 +10,7 @@
 | `.jks`          | Java KeyStore 容器           |
 | `.keystore`     | 只是常见文件名，实际可能是 JKS 或 PKCS12 |
 
+
 ## pem
 一个 PEM 证书：
 ```
