@@ -3,7 +3,80 @@ LINK:https://chatgpt.com/share/6a794651-f280-83ec-9c4d-f6fc16a361b6
 
 # 核心概念
 ## 资源对象
+几乎所有标准 YAML 清单都包含这 4 个顶层字段：
+```
+apiVersion: ...   # API 版本组与版本号，例如 apps/v1、v1、networking.k8s.io/v1
+kind: ...         # 资源类型，例如 Deployment、Pod、Service、ConfigMap
+metadata:         # 元数据：名称、命名空间、标签（labels）、注解（annotations）
+  name: ...
+  namespace: ...
+spec:             # 期望状态（Specification）：你希望这个对象长什么样、跑成什么样
+  ...
+```
+### 1. 工作负载类（Workloads）—— 管“跑什么、跑几个”
 
+- **Pod**：K8s 调度的最小单位，封装一个或多个紧耦合容器，共享网络和存储。
+    
+- **ReplicaSet**：保证指定标签的 Pod 副本数始终符合预期。
+    
+- **Deployment**：管理无状态应用，负责创建/管理 ReplicaSet、滚动更新和回滚。
+    
+- **StatefulSet**：管理有状态应用（如数据库、中间件），提供稳定网络标识、有序启停和独立持久化存储。
+    
+- **DaemonSet**：让集群中每个符合条件的节点（或全部节点）都运行一个 Pod，常用于日志采集、监控 Agent、网络插件。
+    
+- **Job / CronJob**：`Job` 运行一次性批处理任务直到完成；`CronJob` 按定时规则周期性创建 `Job`。
+    
+
+### 2. 服务发现与网络类（Service & Networking）—— 管“怎么连、怎么导流”
+
+- **Service**：为一组动态变化的 Pod 提供稳定的虚拟 IP（ClusterIP）、域名和负载均衡入口。常见类型有 `ClusterIP`、`NodePort`、`LoadBalancer`、`ExternalName`。
+    
+- **Ingress / IngressClass**：管理集群外部 HTTP/HTTPS 流量路由，按域名或路径把请求转发到后端 `Service`（现代集群也常用 **Gateway API** 的 `Gateway`、`HTTPRoute` 等资源）。
+    
+- **NetworkPolicy**：基于标签和 IP/端口控制 Pod 之间的入站/出站流量，实现网络隔离。
+    
+
+### 3. 配置与密钥类（Config & Secret）—— 管“配置和敏感信息”
+
+- **ConfigMap**：以键值对或配置文件形式保存非敏感配置（如环境变量、Nginx 配置），与镜像解耦。
+    
+- **Secret**：专门保存敏感数据（如密码、Token、TLS 证书），默认 Base64 编码，配合 RBAC 和加密存储使用。
+    
+
+### 4. 存储类（Storage）—— 管“数据怎么持久化”
+
+- **Volume**：挂载在 Pod 上的存储卷，生命周期通常依附于 Pod（如 `emptyDir`、`hostPath` 或引用 `ConfigMap`/`Secret`/`PVC`）。
+    
+- **PersistentVolume（PV）**：集群级别的存储资源抽象，由管理员静态创建或由 StorageClass 动态供给。
+    
+- **PersistentVolumeClaim（PVC）**：用户/应用对存储的申请（指定容量、访问模式等），绑定到合适的 PV 上。
+    
+- **StorageClass**：定义存储类型和动态创建 PV 的供给器（Provisioner），实现按需自动建卷。
+    
+
+### 5. 集群管理、安全与扩展类（Cluster & Governance）
+
+- **Namespace**：逻辑隔离资源命名空间（如 `default`、`kube-system`），避免命名冲突并配合配额/权限管理。
+    
+- **Node**：集群中的物理机或虚拟机工作节点。
+    
+- **ServiceAccount / Role / ClusterRole / RoleBinding / ClusterRoleBinding**：RBAC 权限体系，控制“谁（用户/服务账号）”在“什么范围”对“哪些资源”执行“什么操作”。
+    
+- **HorizontalPodAutoscaler（HPA）**：根据 CPU、内存或自定义指标自动调整 Deployment/StatefulSet 的 `replicas` 数量。
+    
+- **CustomResourceDefinition（CRD）**：扩展 K8s API，允许定义自定义资源对象（如各类 Operator 管理的资源）。
+    
+
+### 总结对照表
+
+|**类别**|**核心代表对象**|**解决的核心问题**|
+|---|---|---|
+|**工作负载**|`Pod`、`ReplicaSet`、`Deployment`、`StatefulSet`、`DaemonSet`、`Job`|容器怎么运行、扩缩容、升级与定时任务|
+|**服务与网络**|`Service`、`Ingress`、`NetworkPolicy`|Pod IP 会变，外部与内部流量如何稳定访问与隔离|
+|**配置与密钥**|`ConfigMap`、`Secret`|配置与代码/镜像分离，敏感信息单独管理|
+|**存储**|`Volume`、`PV`、`PVC`、`StorageClass`|容器重启后数据不丢失，存储按需挂载|
+|**治理与扩展**|`Namespace`、`RBAC`、`HPA`、`CRD`|多环境隔离、权限控制、自动扩缩容与自定义扩展|
 ## Pod
 k8s最小的调度单位。一个Pod可以包含一个或多个紧密协作的容器（共享网络和存储）。
 Pod 通常不会被直接创建，而是通过 Deployment 等控制器来管理。当节点发生故障时，控制器会在其他可用节点上重新创建 Pod。
