@@ -47,7 +47,7 @@ LINK:https://chatgpt.com/share/6a794651-f280-83ec-9c4d-f6fc16a361b6
 ### 6. 本地端口转发与快捷生成
 
 - `kubectl port-forward pod/<pod-name> 8080:80` 或 `kubectl port-forward svc/<svc-name> 8080:80`：把本地 `8080` 端口映射到集群内 Pod 或 Service 的 `80` 端口，方便本地调试。
-    
+     
 - `kubectl create deployment web --image=nginx:1.28 --dry-run=client -o yaml`：不实际创建资源，直接生成基础 YAML 模板。
 
 # 核心概念
