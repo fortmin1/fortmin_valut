@@ -1,5 +1,54 @@
 LINK:https://chatgpt.com/share/6a794651-f280-83ec-9c4d-f6fc16a361b6
 # 常用命令
+### 1. 集群上下文与命名空间
+
+- `kubectl config current-context`：查看当前连接的集群上下文。
+    
+- `kubectl config use-context <context-name>`：切换集群上下文。
+    
+- `kubectl get ns`：查看所有命名空间（Namespace）。
+    
+- `kubectl config set-context --current --namespace=<ns>`：把当前上下文的默认命名空间切到指定 `<ns>`，避免每次加 `-n`。
+    
+
+### 2. 部署与变更（声明式为主）
+- `kubectl apply -f <file.yaml|dir>`：创建或更新 YAML 文件/目录中的资源（最推荐的日常变更方式）。
+- `kubectl diff -f <file.yaml>`：应用前对比本地清单与集群现有资源的差异。
+- `kubectl delete -f <file.yaml>` 或 `kubectl delete pod <pod-name>`：删除清单中的资源或指定对象。
+- `kubectl scale deployment/<name> --replicas=5`：快速调整 Deployment 或 ReplicaSet 的副本数。
+- `kubectl set image deployment/<name> <container>=<new-image>`：更新镜像触发滚动升级。
+### 3. 查看状态与资源关联
+
+- `kubectl get pods` / `kubectl get deploy,rs,po,svc`：查看资源列表（可加 `-o wide` 看所在节点和 IP，加 `-w` 持续监听变化，加 `-A` 看所有命名空间）。
+    
+- `kubectl describe pod <pod-name>` / `kubectl describe deploy <name>`：查看资源详情与底部 **Events**，是排查调度失败、镜像拉取失败或标签不匹配的首选命令。
+    
+- `kubectl get <kind> <name> -o yaml`：导出资源的完整 YAML 定义（排查实际生效配置很有用）。
+    
+
+### 4. 日志与容器内排查
+
+- `kubectl logs <pod-name>`：查看 Pod 容器的标准输出日志（加 `-f` 实时跟踪，加 `-c <container>` 指定多容器 Pod 中的某个容器，加 `--previous` 查看崩溃重启前上一个实例的日志）。
+    
+- `kubectl exec -it <pod-name> -- /bin/sh`（或 `/bin/bash`）：进入运行中 Pod 的容器执行交互命令排查网络或配置。
+    
+- `kubectl get events --sort-by=.lastTimestamp`：按时间顺序查看集群事件，定位异常发生的时间点。
+    
+
+### 5. 滚动更新与回滚
+
+- `kubectl rollout status deployment/<name>`：查看滚动更新进度与结果。
+    
+- `kubectl rollout history deployment/<name>`：查看历史修订版本。
+    
+- `kubectl rollout undo deployment/<name>`：回滚到上一个版本（加 `--to-revision=<N>` 可回滚到指定版本）。
+    
+
+### 6. 本地端口转发与快捷生成
+
+- `kubectl port-forward pod/<pod-name> 8080:80` 或 `kubectl port-forward svc/<svc-name> 8080:80`：把本地 `8080` 端口映射到集群内 Pod 或 Service 的 `80` 端口，方便本地调试。
+    
+- `kubectl create deployment web --image=nginx:1.28 --dry-run=client -o yaml`：不实际创建资源，直接生成基础 YAML 模板。
 
 # 核心概念
 ## 资源对象
