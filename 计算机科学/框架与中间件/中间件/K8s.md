@@ -42,7 +42,7 @@ LINK:https://chatgpt.com/share/6a794651-f280-83ec-9c4d-f6fc16a361b6
 - `kubectl rollout history deployment/<name>`：查看历史修订版本。
     
 - `kubectl rollout undo deployment/<name>`：回滚到上一个版本（加 `--to-revision=<N>` 可回滚到指定版本）。
-    
+
 
 ### 6. 本地端口转发与快捷生成
 
