@@ -302,7 +302,7 @@ topologySpreadConstraints
 Node 信息 Pod 信息 Deployment 信息 Service 信息 ConfigMap Secret Namespace RBAC 集群配置 ……
 - controller-manager：Kubernetes 的“巡检 + 自动纠偏系统”。
 - kube-proxy：Kubernetes Service 网络转发。
-
+![](assets/K8s/file-20261124231519515.png)
 ```
                   Kubernetes Cluster
 
